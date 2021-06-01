@@ -1,0 +1,30 @@
+<div class="mx-5 px-5 mt-5">
+    <div class="d-flex justify-content-start">
+        <div class="row w-100">
+            <div class="row">
+                <div class="row mb-5">
+                    <div class="w-100 bg-el-barrio-dark-blue">
+                        <h2>Tiendas</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <ul class="text-center">
+                            <li class="border border-white d-inline-block w-25" *ngFor="let shop of shops">
+                                <a [routerLink]="['/routePath']">
+                                    <div class="card border border-white" style="width: 18rem;">
+                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded-circle"
+                                            alt="imagen no disponible">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{shop}}</h4>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

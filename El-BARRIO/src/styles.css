@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%; 
+    max-width: 100%; 
+    overflow-x: hidden;
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.bg-el-barrio-dark-blue {
+    background-color: #002540;
+    color: #FFFFFF;
+}
+
+.bg-el-barrio-blue {
+    background-color: #005E7A;
+    color: #FFFFFF;
+}
+.bg-el-barrio-golden {
+    background-color: #7C4E04;
+    color: #FFFFFF;
+}
+
+a {
+    color: #000000;
+}
+
+p:hover, .active {
+    color: #005E7A;
+}

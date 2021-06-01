@@ -1,0 +1,11 @@
+.active {
+    color: #005E7A;
+}
+
+p {
+    color: #FFFFFF;
+}
+
+p:hover {
+    color: #005E7A;
+}
