@@ -16,6 +16,8 @@ import { ShopViewComponent } from './components/shop-view/shop-view.component';
 import { ItemViewComponent } from './components/item-view/item-view.component';
 import { AddItemComponent } from './components/add-item/add-item.component';
 import { SiginSellerComponent } from './components/sigin-seller/sigin-seller.component';
+import { ItemsComponent } from './components/items/items.component';
+import { NoimagePipe } from './pipes/noimage.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { SiginSellerComponent } from './components/sigin-seller/sigin-seller.com
     ItemViewComponent,
     AddItemComponent,
     SiginSellerComponent,
-    SiginSellerComponent
+    SiginSellerComponent,
+    ItemsComponent,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,

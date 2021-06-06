@@ -1,0 +1,15 @@
+<div class="card-columns m-5 animated fadeIn">
+    <ul class="text-center">
+        <li class="border-white d-md-inline-block w-25 mb-1" *ngFor="let item of items">
+            <a [routerLink]="['/routePath']">
+                <div class="card" style="width: 18rem;">
+                    <img [src]=" item.image| noimage" class="card-img-top rounded" alt="imagen no disponible">
+                    <div class="card-body">
+                        <h4 class="card-title">{{item}}</h4>
+                        <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

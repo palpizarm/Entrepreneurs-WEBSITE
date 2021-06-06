@@ -1,83 +1,14 @@
 <div class="mx-5 px-5 mt-5">
     <div class="d-flex justify-content-start">
         <div class="row w-100">
-            <div class="row">
+            <div class="row" *ngFor="let catagorie of categories; let index">
                 <div class="row mb-3">
-                    <div class="w-100 bg-el-barrio-dark-blue">
-                        <h2>Categoria 1</h2>
-                        <br><br><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="row mb-3">
-                    <div class="w-100 bg-el-barrio-blue">
-                        <h2>Categoria 2</h2>
+                    <div class="w-100" [class]="banner_color[index%3]">
+                        <h2>Categoria {{index}}</h2>
                         <br><br>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                            <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="row mb-3">
-                    <div class="w-100 bg-el-barrio-golden">
-                        <h2>Categoria 3</h2>
-                        <br><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                            <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <app-items [items]="categories"></app-items>
             </div>
         </div>
     </div>

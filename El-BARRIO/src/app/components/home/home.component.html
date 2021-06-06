@@ -1,4 +1,4 @@
-<div class="mx-5 px-5 mt-5">
+<div class="mx-5 px-5 mt-5 animated fadeIn">
     <div class="d-flex justify-content-start">
         <div class="row w-100">
             <div class="row">
@@ -7,10 +7,9 @@
                         <h2>Tendencias</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container">
+                <div class="card-columns m-5 animated fadeIn">
                         <ul class="text-center">
-                            <li class="border-white d-inline-block m-2 w-25" *ngFor="let categorie of categories">
+                            <li class="border-white d-inline-block mb-1 w-25" *ngFor="let categorie of categories">
                                 <a [routerLink]="['/routePath']">
                                     <div class="card" style="width: 18rem;">
                                         <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
@@ -22,7 +21,6 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
                 </div>
             </div>
 
@@ -32,24 +30,7 @@
                         <h2>Productos destacados</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block m-2 w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                            <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <app-items [items]="categories"></app-items>
             </div>
 
             <div class="row">
@@ -58,24 +39,7 @@
                         <h2>Productos nuevos</h2>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="container">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block m-2 w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                            <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <app-items [items]="categories"></app-items>
             </div>
         </div>
     </div>
