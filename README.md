@@ -1,7 +1,7 @@
 # Entrepreneurs-WEBSITE
 Ecommerce website to Costa Rica entrepreneurs
 
-# technological of costa rica
+# Technological of costa rica
 
 # Students:
 Pablo Alpizar Monge 
