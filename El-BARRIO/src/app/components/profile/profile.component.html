@@ -1,0 +1,45 @@
+<div class="px-5 mt-5 animated fadeIn">
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+                <div>
+                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
+                        (click)="showTab(0);">Información personal</button>
+                </div>
+                <div *ngIf="customerFlag">
+                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
+                        (click)="showTab(1);">
+                        Historial de compra
+                    </button>
+                </div>
+                <div *ngIf="!customerFlag">
+                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
+                        (click)="showTab(2);">
+                        Lista de productos
+                    </button>
+                </div>
+                <div *ngIf="!customerFlag">
+                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
+                        (click)="showTab(3);">
+                        Historial de venta
+                    </button>
+                </div>
+                <br>
+            </div>
+        </div>
+        <div class="col-9">
+            <div *ngIf="tabs[0]">
+                <p>Información personal</p>
+            </div>
+            <div *ngIf="tabs[1]">
+                <p>Historial de compra</p>
+            </div>
+            <div *ngIf="tabs[2]">
+                <p>Lista de productos</p>
+            </div>
+            <div *ngIf="tabs[3]">
+                <p>Historial de venta</p>
+            </div>
+        </div>
+    </div>
+</div>

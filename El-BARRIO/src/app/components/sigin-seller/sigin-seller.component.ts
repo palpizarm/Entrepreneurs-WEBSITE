@@ -6,20 +6,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sigin-seller.component.css']
 })
 export class SiginSellerComponent implements OnInit {
-
-  username:string = '';
-  password:string = '';
+  shopTypes:any = ["Tipo 1", "Tipo 2", "Tipo 3"];
+  name:string = '';
+  lastname:string = '';
+  password1:string = '';
+  password2:string = '';
+  mail:string = '';
+  shopName:string = '';
+  shopType:string = '';
+  description:string = '';
+  state:string = '';
+  city:string = '';
+  town:string = '';
+  direction:string = '';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  startLogin(event) {
-    console.log(this.username, this.password);
-    //setTimeout("window.location.reload()",500);
-   
+  register(event) {
+    console.log("Enviar solicitud");
+  }
 
+  setType(type:string) {
+    this.shopType = type;
   }
 
 }

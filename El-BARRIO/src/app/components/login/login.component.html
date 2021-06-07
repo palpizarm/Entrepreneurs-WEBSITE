@@ -17,7 +17,7 @@
                         placeholder="Nombre de usuario" aria-describedby="basic-addon1">
                     <input type="password" class="form-control m-2" [(ngModel)]="password" name="user-data"
                         placeholder="Contraseña" aria-describedby="basic-addon1">
-                    <button type="submit" class="btn bg-el-barrio-blue btn-lg btn-block m-2 text-uppercase"
+                    <button type="submit" class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
                         (click)="startLogin($event)">Iniciar Sesión</button>
                 </form>
             </div>
@@ -27,7 +27,7 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <h2 class="mx-5">¿No tienes cuenta?</h2>
-            <a class="btn rounded-pill bg-el-barrio-golden" routerLink="/registerUser">
+            <a class="btn rounded-pill bg-el-barrio-blue" routerLink="/registerUser">
                 <p class="text-uppercase mt-1">Registrarme</p>
             </a>
         </div>
@@ -36,7 +36,7 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <h2 class="mx-5 text-center">¿No tienes cuenta?</h2>
-            <a class="btn rounded-pill text-center bg-el-barrio-dark-blue" routerLink="/registerSeller">
+            <a class="btn rounded-pill text-center bg-el-barrio-blue" routerLink="/registerSeller">
                 <p class="text-uppercase mt-1">Registrar mi tienda</p>
             </a>
         </div>

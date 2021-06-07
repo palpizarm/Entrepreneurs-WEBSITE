@@ -11,7 +11,9 @@ body {
     max-width: 100%;
     overflow-x: hidden;
 }
-
+.puntero {
+    cursor: pointer;
+}
 .bg-el-barrio-dark-blue {
     background-color: #002540;
     color: #FFFFFF;

@@ -1,23 +1,76 @@
-<div class="container mb-5 animated fadeIn">
+<div class="container mb-5 animated fadeIn mt-5">
     <div class="row">
         <div class="d-flex justify-content-center">
-            <h1 class="fs-1">Registrarme</h1>
+            <h1 class="fs-1">Crear una cuenta</h1>
         </div>
     </div>
     <div class="row">
         <div class="d-flex justify-content-center">
-            <i class="bi bi-person-circle" style="color: #005E7A; font-size: xx-large;"></i>
-        </div>
-    </div>
-    <div class="row">
-        <div class="d-flex justify-content-center">
-            <div class="mt-5">
-                <form class="text-center">
-                    <input type="text" class="form-control m-2" name="user-data" placeholder="Nombre de usuario" aria-describedby="basic-addon1">
-                    <input type="password" class="form-control m-2" name="user-data" placeholder="Contraseña" aria-describedby="basic-addon1">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block m-2" (click)="startLogin($event)">Continuar</button>
+            <div class="mt-5 w-50">
+                <form (submit)="register($event)" class="text-center form-control border-0 animeted fadeIn">
+                    <div class="row">
+                        <div class="col-1 m-0 p-0">
+                            <span class="align-self-start fas fa-circle fa-3x" style="color: #005E7A;"></span>
+                        </div>
+                        <div class="col-10  m-0 mt-4 p-0">
+                            <div class="progress" style="height: 3px;">
+                                <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="col-1 m-0 p-0">
+                            <span class="align-self-end fas fa-circle fa-3x" style="color: gray;"></span>
+                        </div>
+                    </div>
+                    <br><br><br>
+                    <h2 class="fs-2 text-start m-md-4 mb-5">Información personal</h2>
+                    <input type="text" class="form-control m-md-4 w-50" [value]="name" name="user-data"
+                        placeholder="Nombre">
+                    <input type="password" class="form-control m-md-4 w-50" [value]="lastname" name="user-data"
+                        placeholder="Apellidos">
+                    <input type="password" class="form-control m-md-4" [value]="mail" name="user-data"
+                        placeholder="Correo">
+                    <div class="input-group m-md-4">
+                        <input type="password" class="form-control" [value]="password1" placeholder="Contraseña">
+                        <input type="password" class="form-control mx-1" [value]="password2"
+                            placeholder="Repetir contraseña">
+                    </div>
+                    <br><br><br>
+                    <h2 class="fs-2 text-start m-md-4 mb-5">Información de la tienda</h2>
+                    <div class="input-group m-md-4 mb-3">
+                        <label class="input-group-text" for="inputGroupFile01">Seleccionar Imagen</label>
+                        <input type="file" class="form-control" id="inputGroupFile01">
+                    </div>
+                    <input type="text" class="form-control m-md-4" [value]="shopName" name="user-data"
+                        placeholder="Nombre de la tienda">
+                    <textarea type="text" class="form-control m-md-4" [value]="description" name="user-data"
+                        placeholder="Descripción">
+                    </textarea>
+                    <div class="dropdown text-start m-md-4">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
+                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Tipo de empredimiento
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li *ngFor="let type of shopTypes"><button class="dropdown-item"
+                                    onclick="setType(type)">{{type}}</button></li>
+                        </ul>
+                    </div>
+                    <div class="input-group m-md-4">
+                        <input type="text" class="form-control" [value]="state" placeholder="Canton">
+                        <input type="text" class="form-control mx-1" [value]="city" placeholder="Canton">
+                        <input type="text" class="form-control mx-1" [value]="town" placeholder="Distrito">
+                    </div>
+                    <textarea type="text" class="form-control m-md-4" [value]="direction" name="user-data"
+                        placeholder="Otras señas">
+                    </textarea>
+                    <button type="submit"
+                        class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase">
+                        Enviar Solicitud
+                    </button>
                 </form>
             </div>
         </div>
     </div>
+    <br><br>
 </div>

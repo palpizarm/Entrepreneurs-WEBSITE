@@ -6,6 +6,7 @@ import { HomeComponent } from './components/home/home.component';
 import { InformationComponent } from './components/information/information.component';
 import { ItemViewComponent } from './components/item-view/item-view.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { ShopViewComponent } from './components/shop-view/shop-view.component';
 import { ShopsComponent } from './components/shops/shops.component';
 import { SiginCustomerComponent } from './components/sigin-customer/sigin-customer.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'itemView/:id', component: ItemViewComponent},
   { path: 'registerUser', component: SiginCustomerComponent},
   { path: 'registerSeller', component: SiginSellerComponent},
+  { path: 'profileInformation', component: ProfileComponent},
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

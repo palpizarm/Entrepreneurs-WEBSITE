@@ -6,7 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-
+  about:boolean = true;
+  questions:boolean = false;
+  politics:boolean = false;
   constructor() { }
 
   ngOnInit(): void {

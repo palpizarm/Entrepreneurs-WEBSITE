@@ -18,6 +18,7 @@ import { AddItemComponent } from './components/add-item/add-item.component';
 import { SiginSellerComponent } from './components/sigin-seller/sigin-seller.component';
 import { ItemsComponent } from './components/items/items.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NoimagePipe } from './pipes/noimage.pipe';
     SiginSellerComponent,
     SiginSellerComponent,
     ItemsComponent,
-    NoimagePipe
+    NoimagePipe,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
