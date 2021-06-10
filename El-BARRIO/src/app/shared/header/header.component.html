@@ -3,9 +3,13 @@
         <div class="row py-2">
             <div class="col-sm-4 col-md-3">
                 <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary"
+                        (click)="logout()" [disabled]='!userLogin'>
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
                     <button type="button" class="btn btn-outline-secondary text-white" (click)="login()">
                         <i class="bi bi-person-circle"></i>
-                        <span class="align-middle ms-2">{{session}}</span>
+                        <span class="align-middle ms-2">{{session | uppercase}}</span>
                     </button>
                 </div>
             </div>

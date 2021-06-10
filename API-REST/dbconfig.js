@@ -1,10 +1,21 @@
-const config = {
+const dbElbarrio = {
     user: 'elbarrio',
     password: 'Admin123',
     server: 'grupotec.database.windows.net', 
-    database: 'BDTEC',
+    database: 'BD_ELBARRIO',
+    ssl:true
+}
+
+const dbUsers = {
+    user: 'elbarrio',
+    password: 'Admin123',
+    server: 'grupotec.database.windows.net', 
+    database: 'BD_USUARIOS',
     ssl:true
 }
 
 
-module.exports = config;
+module.exports = {
+    dbElbarrio : dbElbarrio,
+    dbUsers : dbUsers
+}

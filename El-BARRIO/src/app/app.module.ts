@@ -19,6 +19,7 @@ import { SiginSellerComponent } from './components/sigin-seller/sigin-seller.com
 import { ItemsComponent } from './components/items/items.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

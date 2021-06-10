@@ -10,8 +10,15 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   
   session:string = "Iniciar Sesión";
-
-  constructor(public router : Router) { }
+  userLogin: boolean = false;
+  
+  constructor(public router : Router) { 
+    if (localStorage.getItem('user-session')) {
+      var user = JSON.parse(localStorage.getItem('user-session'));
+      this.session = user.user_name;
+      this.userLogin = true;
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -20,10 +27,18 @@ export class HeaderComponent implements OnInit {
   login() {
     if (localStorage.getItem("user-session")) {
       this.router.navigate([""]);
-      this.session = "Pablo Alpizar"
+      this.userLogin = true;
     } else {
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     }
+  }
+
+  logout() {
+    this.userLogin = false;
+    localStorage.removeItem("user-session");
+    this.session = 'Iniciar Sesión';
+    window.location.reload();
+
   }
 
 }
