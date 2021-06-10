@@ -1,4 +1,4 @@
-const config = require('../dbconfig');
+const dbconfig = require('../dbconfig');
 const express = require('express');
 const router = express.Router();
 const sql = require('mssql');
@@ -7,7 +7,7 @@ const sql = require('mssql');
 // req.body {username,password}
 router.post('/getSession', async(req,res) => {
     try {
-        let pool = await sql.connect(config);
+        let pool = await sql.connect(dbconfig);
         let users =  await pool.request().query(`SELECT * FROM dbo.USERS`);
         res.json({
             code : 1,
