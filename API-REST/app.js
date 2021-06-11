@@ -18,8 +18,11 @@ app.use((req,res, next) => {
 /* import routes*/
 const loginRoute  = require('./routes/login');
 
+const signupRoute  = require('./routes/signup');
+
 // set routes
 app.use('/login', loginRoute);
+app.use('/signup', signupRoute);
 
 
 
