@@ -14,9 +14,14 @@ export class HeaderComponent implements OnInit {
   
   constructor(public router : Router) { 
     if (localStorage.getItem('user-session')) {
-      var user = JSON.parse(localStorage.getItem('user-session'));
-      this.session = user.user_name;
-      this.userLogin = true;
+      try {
+        var user = JSON.parse(localStorage.getItem('user-session'));
+        this.session = user.user_name;
+        this.userLogin = true;
+      } catch(error) {
+        localStorage.removeItem('user-session');
+      }
+
     }
   }
 

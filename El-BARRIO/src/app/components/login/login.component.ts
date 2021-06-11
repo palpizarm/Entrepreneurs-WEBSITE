@@ -22,18 +22,26 @@ export class LoginComponent implements OnInit {
 
 
   startLogin(event) {
-    this.loading = true;
+    if (localStorage.getItem('user-session')) {
+      localStorage.removeItem('user-session');
+    }
+    
     if (this.username.length != 0 && this.password.length != 0) {
+      this.loading = true;
       this.login.getLogin(this.username, this.password)
         .subscribe((data:any) =>{
           if(data.code > 0) {
             let user = data.data[0];
             localStorage.setItem('user-session', JSON.stringify(user));
-            console.log(JSON.parse(localStorage.getItem('user-session')));
             this.router.navigate(['/home']);
           }
+          else {
+            this.loading = false;
+            this.username = ''; 
+            this.password = '';
+          }
         }, (errorSevice) => {
-          console.log(errorSevice);
+          console.log('Login error');
           this.loading = false;
         })
     }
