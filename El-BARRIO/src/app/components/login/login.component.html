@@ -17,6 +17,7 @@
                         placeholder="Nombre de usuario" aria-describedby="basic-addon1">
                     <input type="password" class="form-control m-2" [(ngModel)]="password" name="user-data"
                         placeholder="Contraseña" aria-describedby="basic-addon1">
+                    <span class="text-danger">{{msgError}}</span>
                     <button type="submit" class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
                         (click)="startLogin($event)" [disabled]='loading'>Iniciar Sesión</button>
                 </form>
