@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShopViewComponent implements OnInit {
 
+  shop = {
+    img : '',
+    name : '',
+    desciption : '' 
+  }
+  items : any[] = [1,2,3,4,5,6,7];
   constructor() { }
 
   ngOnInit(): void {

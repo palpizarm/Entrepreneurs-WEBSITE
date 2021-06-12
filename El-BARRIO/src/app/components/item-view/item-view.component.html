@@ -1,1 +1,33 @@
-<p>item-view works!</p>
+<div class="row m-5">
+    <div class="col-4 mt-5">
+        <img [src]=" item.img | noimage" alt="" srcset="">
+    </div>
+    <div class="col-8">
+        <div class="container m-5">
+            <h3 class="fs-1 my-2">Zapatilla deportiva</h3>
+            <div class="col-8 my-1">
+                <span class="my-2" [class]="star"  *ngFor="let star of rating"></span>
+            </div>
+            <div class="my-2">
+                <button (click)="quantitySub()" class="fas fa-minus btn"></button>
+                <input class="border-1 rounded-pill text-center" type="text" [value]="count">
+                <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
+                <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2">Añadir al carrito</button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="mx-5" style="height: 2px;">
+<div class="row">
+    <h2 class="fs-3 ms-5">Productos Relacionados</h2>
+    <app-items [items]="items"></app-items>
+</div>
+<div class="row container">
+    <h2 class="fs-3 text-center">Opiones</h2>
+
+</div>
+<div class="row container">
+    <form>
+        
+    </form>
+</div>

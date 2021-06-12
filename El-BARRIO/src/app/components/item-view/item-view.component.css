@@ -1,0 +1,21 @@
+.btn-bg-green {
+    background: #17C3B2;
+    color: #000000;
+}
+
+.btn-bg-green:hover {
+    color: #FFFFFF;
+}
+
+
+.starGold {
+    color: #ffc107;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
