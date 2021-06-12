@@ -11,13 +11,13 @@
     </div>
     <div class="row">
         <div class="d-flex justify-content-center">
-            <div class="mt-5 w-50">
-                <form class="text-center">
-                    <input type="text" class="form-control m-2" [(ngModel)]="username" name="user-data"
+            <div class="mt-5 w-25">
+                <form class="text-center" autocomplete="off">
+                    <input type="text" class="form-control m-2" [(ngModel)]="username" name="name"
                         placeholder="Nombre de usuario" aria-describedby="basic-addon1">
-                    <input type="password" class="form-control m-2" [(ngModel)]="password" name="user-data"
+                    <input type="password" class="form-control m-2" [(ngModel)]="password" name="pass"
                         placeholder="Contraseña" aria-describedby="basic-addon1">
-                    <span class="text-danger">{{msgError}}</span>
+                    <small class="text-danger" *ngIf="username == '' && password == '' && errorLogin">{{msgError}}</small>
                     <button type="submit" class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
                         (click)="startLogin($event)" [disabled]='loading'>Iniciar Sesión</button>
                 </form>

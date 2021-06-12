@@ -8,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class SiginCustomerComponent implements OnInit {
 
   name:string = '';
-  lastname:string = '';
+  username:string = '';
   password1:string = '';
   password2:string = '';
+  phone:string = '';
+  id:string = '';
   mail:string = '';
+  state:string = '';
+  city:string = '';
+  direction:string = '';
 
 
   constructor() { }
@@ -20,9 +25,8 @@ export class SiginCustomerComponent implements OnInit {
   }
 
   startLogin(event) {
-    //setTimeout("window.location.reload()",500);
-   
-
+    event.preventDefault();
+    
   }
 
 }

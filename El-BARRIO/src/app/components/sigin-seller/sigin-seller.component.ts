@@ -7,17 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiginSellerComponent implements OnInit {
   shopTypes:any = ["Tipo 1", "Tipo 2", "Tipo 3"];
+  
   name:string = '';
-  lastname:string = '';
+  username:string = '';
   password1:string = '';
   password2:string = '';
   mail:string = '';
+  phone:string = '';
+  id:string = '';
   shopName:string = '';
   shopType:string = '';
   description:string = '';
   state:string = '';
   city:string = '';
-  town:string = '';
   direction:string = '';
 
   constructor() { }
@@ -26,6 +28,7 @@ export class SiginSellerComponent implements OnInit {
   }
 
   register(event) {
+    event.preventDefault();
     console.log("Enviar solicitud");
   }
 

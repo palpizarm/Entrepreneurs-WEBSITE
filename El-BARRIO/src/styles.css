@@ -36,6 +36,10 @@ p:hover, .active {
     color: #005E7A;
 }
 
+button:hover {
+    color: #FFFFFF;
+}
+
 .animated {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;

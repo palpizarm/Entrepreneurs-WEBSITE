@@ -8,20 +8,24 @@
         <div class="d-flex justify-content-center">
             <div class="mt-5 w-50">
                 <form class="text-center form-control border-0">
-                    <input type="text" class="form-control m-4 w-50" [value]="name" name="user-data"
-                        placeholder="Nombre" aria-describedby="basic-addon1">
-                    <input type="password" class="form-control m-4 w-50" [value]="lastname" name="user-data"
-                        placeholder="Apellidos" aria-describedby="basic-addon1">
-                    <input type="password" class="form-control m-4" [value]="mail" name="user-data"
-                        placeholder="Correo" aria-describedby="basic-addon1">
-                        <div class="input-group m-4">
-                            <input type="password" class="form-control" [value]="password1" placeholder="Contraseña" aria-label="Username">
-                            
-                            <input type="password" class="form-control mx-1" [value]="password2" placeholder="Repetir contraseña" aria-label="Server">
-                          </div>
-                    <button type="submit"
-                        class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        (click)="startLogin($event)">Registrarme</button>
+                    <input type="text" class="form-control m-4" required [value]="name" placeholder="Nombre completo">
+                    <input type="text" class="form-control m-4 w-50" required [value]="username" placeholder="nombre de usuario">
+                    <input type="text" class="form-control m-4 w-50" required [value]="phone" placeholder="Telefono">
+                    <input type="text" class="form-control m-4 w-50" required [value]="id" placeholder="Cedula">
+                    <input type="password" class="form-control m-4" required [value]="mail" placeholder="Correo">
+                    <div class="input-group m-md-4">
+                        <input type="text" class="form-control" required [value]="state" placeholder="Provincia">
+                        <input type="text" class="form-control mx-1" required [value]="city" placeholder="Canton">
+                    </div>
+                    <textarea type="text" class="form-control m-md-4" required [value]="direction" placeholder="Otras señas">
+                        </textarea>
+                    <div class="input-group m-4">
+                        <input type="password" class="form-control" required [value]="password1" placeholder="Contraseña" aria-label="Username">
+                        <input type="password" class="form-control mx-1" required [value]="password2" placeholder="Repetir contraseña" aria-label="Server">
+                    </div>
+                    <input type="submit"
+                        class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                        value="Registrarme" (click)="startLogin($event)">
                 </form>
             </div>
         </div>

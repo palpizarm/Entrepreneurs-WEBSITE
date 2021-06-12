@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   
-  session:string = "Iniciar Sesión";
+  session:string = "Perfil";
   userLogin: boolean = false;
   
   constructor(public router : Router) { 
@@ -28,10 +28,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   login() {
     if (localStorage.getItem("user-session")) {
-      this.router.navigate([""]);
+      this.router.navigate(["/profileInformation"]);
       this.userLogin = true;
     } else {
       this.router.navigate(['/login']);
@@ -44,6 +43,14 @@ export class HeaderComponent implements OnInit {
     this.session = 'Iniciar Sesión';
     window.location.reload();
 
+  }
+
+  goShoppingCart() {
+    if (localStorage.getItem("user-session")) {
+      this.router.navigate(["/shopping-cart"]);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

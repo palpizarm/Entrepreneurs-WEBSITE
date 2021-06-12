@@ -7,7 +7,7 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="mt-5 w-50">
-                <form (submit)="register($event)" class="text-center form-control border-0 animeted fadeIn">
+                <form class="text-center form-control border-0 animeted fadeIn">
                     <div class="row">
                         <div class="col-1 m-0 p-0">
                             <span class="align-self-start fas fa-circle fa-3x" style="color: #005E7A;"></span>
@@ -23,17 +23,15 @@
                         </div>
                     </div>
                     <br><br><br>
+                    </form>
+                    <form class="text-center form-control border-0 animeted fadeIn">
                     <h2 class="fs-2 text-start m-md-4 mb-5">Información personal</h2>
-                    <input type="text" class="form-control m-md-4 w-50" [value]="name" name="user-data"
-                        placeholder="Nombre">
-                    <input type="password" class="form-control m-md-4 w-50" [value]="lastname" name="user-data"
-                        placeholder="Apellidos">
-                    <input type="password" class="form-control m-md-4" [value]="mail" name="user-data"
-                        placeholder="Correo">
+                    <input type="text" class="form-control m-md-4 w-50" required [value]="name" placeholder="Nombre">
+                    <input type="text" class="form-control m-md-4 w-50" required [value]="username"  placeholder="Nombre nombre">
+                    <input type="text" class="form-control m-md-4" required [value]="mail" placeholder="Correo">
                     <div class="input-group m-md-4">
-                        <input type="password" class="form-control" [value]="password1" placeholder="Contraseña">
-                        <input type="password" class="form-control mx-1" [value]="password2"
-                            placeholder="Repetir contraseña">
+                        <input type="password" class="form-control" required [value]="password1" placeholder="Contraseña">
+                        <input type="password" class="form-control mx-1" required [value]="password2" placeholder="Repetir contraseña">
                     </div>
                     <br><br><br>
                     <h2 class="fs-2 text-start m-md-4 mb-5">Información de la tienda</h2>
@@ -41,9 +39,9 @@
                         <label class="input-group-text" for="inputGroupFile01">Seleccionar Imagen</label>
                         <input type="file" class="form-control" id="inputGroupFile01">
                     </div>
-                    <input type="text" class="form-control m-md-4" [value]="shopName" name="user-data"
+                    <input type="text" class="form-control m-md-4" required [value]="shopName" name="user-data"
                         placeholder="Nombre de la tienda">
-                    <textarea type="text" class="form-control m-md-4" [value]="description" name="user-data"
+                    <textarea type="text" class="form-control m-md-4" required [value]="description" name="user-data"
                         placeholder="Descripción">
                     </textarea>
                     <div class="dropdown text-start m-md-4">
@@ -57,17 +55,15 @@
                         </ul>
                     </div>
                     <div class="input-group m-md-4">
-                        <input type="text" class="form-control" [value]="state" placeholder="Canton">
-                        <input type="text" class="form-control mx-1" [value]="city" placeholder="Canton">
-                        <input type="text" class="form-control mx-1" [value]="town" placeholder="Distrito">
+                        <input type="text" class="form-control" required [value]="state" placeholder="Provincia">
+                        <input type="text" class="form-control mx-1" required [value]="city" placeholder="Canton">
                     </div>
-                    <textarea type="text" class="form-control m-md-4" [value]="direction" name="user-data"
+                    <textarea type="text" class="form-control m-md-4" required [value]="direction" name="user-data"
                         placeholder="Otras señas">
                     </textarea>
-                    <button type="submit"
-                        class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase">
-                        Enviar Solicitud
-                    </button>
+                    <input type="submit"
+                        class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                        value="Enviar Solicitud" (click)="register($event)">
                 </form>
             </div>
         </div>

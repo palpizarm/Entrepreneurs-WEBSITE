@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-3">
             <div class="list-group">
-                <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start" (click)="about = true; questions = false; politics = false;">Acerda de
+                <button type="button" class="btn border-0 list-group-item text-start" [ngClass]="{'bg-dark': about, 'text-white' : about}" (click)="about = true; questions = false; politics = false;">Acerda de
                 </button>
-                <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start" (click)="about = false; questions = false; politics = true;">Pólitica de
+                <button type="button" class="btn border-0 list-group-item text-start" [ngClass]="{'bg-dark': politics, 'text-white' : politics}" (click)="about = false; questions = false; politics = true;">Pólitica de
                     uso</button>
-                <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start" (click)="about = false; questions = true; politics = false;">
+                <button type="button" class="btn border-0 list-group-item text-start" [ngClass]="{'bg-dark': questions, 'text-white' : questions}" (click)="about = false; questions = true; politics = false;">
                     Preguntas frecuentes
                 </button>
             </div>

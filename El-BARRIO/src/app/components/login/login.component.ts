@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   username:string = '';
   password:string = '';
   msgError:string = '';
+  errorLogin:boolean = false;
 
   constructor(private router:Router, private login:LoginService) {
 
@@ -40,11 +41,15 @@ export class LoginComponent implements OnInit {
             this.loading = false;
             this.username = ''; 
             this.password = '';
+            this.errorLogin = true;
+            this.msgError = data.msg;
           }
         }, (errorSevice) => {
-          console.log('Login error');
           this.loading = false;
         })
+    } else {
+      this.errorLogin = true;
+      this.msgError = "Ingrese el usuario y contraseña";
     }
   }
 

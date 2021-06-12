@@ -20,6 +20,7 @@ import { ItemsComponent } from './components/items/items.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     SiginSellerComponent,
     ItemsComponent,
     NoimagePipe,
-    ProfileComponent
+    ProfileComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,
