@@ -20,9 +20,12 @@ const loginRoute  = require('./routes/login');
 
 const signupRoute  = require('./routes/signup');
 
+const categoryRoute  = require('./routes/category');
+
 // set routes
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
+app.use('/categoryTop', categoryRoute);
 
 
 
