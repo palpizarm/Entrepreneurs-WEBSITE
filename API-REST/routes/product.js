@@ -141,4 +141,59 @@ router.post('/productSearchBar', async(req,res) => {
     }
 })
 
+
+//mostrar los productos pendientes de aprobar
+
+router.post('/getProductsToAprove', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let productsAp =  await poolEB.request()
+            .query(`SELECT * 
+            FROM ITEM
+            WHERE status = 0`);
+        
+        res.json({
+            code : 1,
+             msg : '',
+            data : productsAp.recordsets[0]
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo mostrar los productos por aprobar.',
+            data : error
+        });
+    }
+})
+
+//Update de estado de los productos
+
+router.post('/getProductUpdate', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let productsAp =  await poolEB.request()
+            .query(`Update ITEM Set status = ${req.body.status} Where id_item = ${req.body.id_item}`);
+        
+        res.json({
+            code : 1,
+             msg : 'El estado fue cambiado exitosamente.',
+            data : {}
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo actualizar el estado del producto.',
+            data : error
+        });
+    }
+})
+
+
+
 module.exports = router
