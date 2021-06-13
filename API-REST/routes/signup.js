@@ -13,14 +13,14 @@ router.post('/registerConsumidor', async(req,res) => {
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
             .query(`SELECT user_name FROM USERS 
-                    WHERE user_name = '${req.body.username}'`);
+                    WHERE user_name = '${req.body.email}'`);
 
-        
+        console.log(req.body);
         if (Object.keys(users.recordsets[0]).length == 0){
             
             let registerU =  await pool.request()
             .query(`INSERT INTO USERS (user_name,password,user_type)
-            VALUES ('${req.body.username}','${req.body.password}',${1})`);
+            VALUES ('${req.body.email}','${req.body.password}',${1})`);
             
             //BD_ELBARRIO
             sql.close();
@@ -46,7 +46,7 @@ router.post('/registerConsumidor', async(req,res) => {
 
             //respuesta
             let resBd = await poolEB.request()
-            .query(`SELECT TOP(1) u.name, u.email, u.phone, u.cedula, a.state, a.city, a.address_opt
+            .query(`SELECT TOP(1) *
             FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 
             inner join ADDRESS a on c.address = a.id_address
             ORDER BY u.id_user DESC`);
@@ -83,14 +83,14 @@ router.post('/registerEmprendedor', async(req,res) => {
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
             .query(`SELECT user_name FROM USERS 
-                    WHERE user_name = '${req.body.username}'`);
+                    WHERE user_name = '${req.body.email}'`);
 
         
         if (Object.keys(users.recordsets[0]).length == 0){
             
             let registerU =  await pool.request()
             .query(`INSERT INTO USERS (user_name,password,user_type)
-            VALUES ('${req.body.username}','${req.body.password}',${3})`);
+            VALUES ('${req.body.email}','${req.body.password}',${3})`);
             
             //BD_ELBARRIO
             sql.close();

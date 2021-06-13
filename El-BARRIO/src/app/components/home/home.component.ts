@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemscategoriesService } from 'src/app/services/itemscategories.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  categories:any = [1,2,3,4,5,6]
+  categories:any = [];
 
-  constructor() { }
+  constructor(private categoriesService:ItemscategoriesService) { 
+    this.categoriesService.getTopCategories()
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          (data.data).forEach( categorie => {
+            this.categories.push(categorie.name);
+          });
+        }
+      },(error) => {
+      })
+  }
 
   ngOnInit(): void {
   }

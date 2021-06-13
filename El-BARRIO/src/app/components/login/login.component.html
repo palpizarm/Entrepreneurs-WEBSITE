@@ -12,14 +12,20 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="mt-5 w-25">
-                <form class="text-center" autocomplete="off">
-                    <input type="text" class="form-control m-2" [(ngModel)]="username" name="name"
-                        placeholder="Nombre de usuario" aria-describedby="basic-addon1">
-                    <input type="password" class="form-control m-2" [(ngModel)]="password" name="pass"
-                        placeholder="Contraseña" aria-describedby="basic-addon1">
-                    <small class="text-danger" *ngIf="username == '' && password == '' && errorLogin">{{msgError}}</small>
-                    <button type="submit" class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        (click)="startLogin($event)" [disabled]='loading'>Iniciar Sesión</button>
+                <form class="text-center" autocomplete="off" #forma="ngForm" (ngSubmit)="startLogin(forma)">
+                    <input type="text" class="form-control m-2"
+                        [class.is-invalid]="username.invalid && username.touched" placeholder="Correo" name="username"
+                        required [ngModel]="user.username" #username="ngModel" (ngModelChange)="errorLogin=false">
+                    <small class="text-danger" *ngIf="username.invalid && username.touched">Ingrese en usuario</small>
+                    <input type="password" class="form-control m-2"
+                        [class.is-invalid]="password.invalid && password.touched" placeholder="Contraseña" name="password" 
+                        required [ngModel]="user.password" #password="ngModel" (ngModelChange)="errorLogin=false">
+                    <small class="text-danger" *ngIf="password.invalid && password.touched">Ingrese en
+                        contraseña</small>
+                    <small class="text-danger" *ngIf="errorLogin">{{msgError}}</small>
+                    <button type="submit"
+                        class="btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                        [disabled]='loading'>Iniciar Sesión</button>
                 </form>
             </div>
         </div>

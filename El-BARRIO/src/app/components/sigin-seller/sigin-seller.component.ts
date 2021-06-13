@@ -8,11 +8,25 @@ import { Component, OnInit } from '@angular/core';
 export class SiginSellerComponent implements OnInit {
   shopTypes:any = ["Tipo 1", "Tipo 2", "Tipo 3"];
   
+  customer = {
+    name: '',
+    username: '',
+    password1: '',
+    password2: '',
+    phone: '',
+    id: '',
+    mail: '',
+    state: '',
+    city: '',
+    direction: ''
+  }
+
   name:string = '';
   username:string = '';
   password1:string = '';
   password2:string = '';
   mail:string = '';
+  urlImg:string = '';
   phone:string = '';
   id:string = '';
   shopName:string = '';
@@ -27,9 +41,11 @@ export class SiginSellerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(event) {
+  register(event, img) {
     event.preventDefault();
-    console.log("Enviar solicitud");
+    console.log(img);
+    
+    
   }
 
   setType(type:string) {

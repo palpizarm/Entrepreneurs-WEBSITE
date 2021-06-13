@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/service/login.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +9,16 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class LoginComponent implements OnInit {
   loading: boolean = false;
-  username:string = '';
-  password:string = '';
-  msgError:string = '';
-  errorLogin:boolean = false;
 
-  constructor(private router:Router, private login:LoginService) {
+  user = {
+    username: '',
+    password: '',
+  }
+  errorLogin: boolean = false;
+  msgError: string = '';
+
+
+  constructor(private router: Router, private login: LoginService) {
 
   }
 
@@ -23,34 +27,32 @@ export class LoginComponent implements OnInit {
   }
 
 
-  startLogin(event) {
+  startLogin(loginForm: any) {
     if (localStorage.getItem('user-session')) {
       localStorage.removeItem('user-session');
     }
-    
-    if (this.username.length != 0 && this.password.length != 0) {
-      this.loading = true;
-      this.login.getLogin(this.username, this.password)
-        .subscribe((data:any) =>{
-          if(data.code > 0) {
-            let user = data.data[0];
-            localStorage.setItem('user-session', JSON.stringify(user));
-            this.router.navigate(['/home']);
-          }
-          else {
-            this.loading = false;
-            this.username = ''; 
-            this.password = '';
-            this.errorLogin = true;
-            this.msgError = data.msg;
-          }
-        }, (errorSevice) => {
-          this.loading = false;
-        })
-    } else {
-      this.errorLogin = true;
-      this.msgError = "Ingrese el usuario y contraseña";
-    }
-  }
+    if (loginForm.invalid) {
+      Object.values(loginForm.controls).forEach((control: any) => {
+        control.markAsTouched();
 
+      })
+      return;
+    }
+    this.loading = true;
+    this.login.getLogin(loginForm.value.username, loginForm.value.password)
+      .subscribe((data: any) => {
+        if (data.code > 0) {
+          let user = data.data[0];
+          localStorage.setItem('user-session', JSON.stringify(user));
+          this.router.navigate(['/home']);
+        }
+        else {
+          this.loading = false;
+          this.errorLogin = true;
+          this.msgError = 'Usuario o contraseña incorrecta';
+        }
+      }, (errorSevice) => {
+        this.loading = false;
+      })
+  }
 }

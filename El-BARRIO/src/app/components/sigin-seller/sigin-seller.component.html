@@ -24,7 +24,7 @@
                     </div>
                     <br><br><br>
                     </form>
-                    <form class="text-center form-control border-0 animeted fadeIn">
+                    <form class="text-center form-control border-0 animeted fadeIn" autocomplete="off">
                     <h2 class="fs-2 text-start m-md-4 mb-5">Información personal</h2>
                     <input type="text" class="form-control m-md-4 w-50" required [value]="name" placeholder="Nombre">
                     <input type="text" class="form-control m-md-4 w-50" required [value]="username"  placeholder="Nombre nombre">
@@ -37,7 +37,7 @@
                     <h2 class="fs-2 text-start m-md-4 mb-5">Información de la tienda</h2>
                     <div class="input-group m-md-4 mb-3">
                         <label class="input-group-text" for="inputGroupFile01">Seleccionar Imagen</label>
-                        <input type="file" class="form-control" id="inputGroupFile01">
+                        <input type="file" #imgFile required class="form-control" id="inputGroupFile01">
                     </div>
                     <input type="text" class="form-control m-md-4" required [value]="shopName" name="user-data"
                         placeholder="Nombre de la tienda">
@@ -63,7 +63,7 @@
                     </textarea>
                     <input type="submit"
                         class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        value="Enviar Solicitud" (click)="register($event)">
+                        value="Enviar Solicitud" (click)="register($event, imgFile.value)">
                 </form>
             </div>
         </div>
