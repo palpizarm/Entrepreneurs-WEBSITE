@@ -5,14 +5,14 @@ const express = require('express');
 const router = express.Router();
 const sql = require('mssql');
 
-//top(6) de productos para Tendencias
+//Top(6) de categorias para Tendencias
 
 router.post('/getTopCategories', async(req,res) => {
     try {
         let poolEB = await sql.connect(dbElbarrio);
         
         let categories =  await poolEB.request()
-            .query(`SELECT TOP(6) name FROM CATEGORY`);
+            .query(`SELECT TOP(6) id_category,name FROM CATEGORY`);
         
         res.json({
             code : 1,
