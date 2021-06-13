@@ -2,3 +2,7 @@
     color: #FFFFFF;
     background: #005E7A;
 }
+
+p:hover, a:hover {
+    color: #FFFFFF;
+}

@@ -19,54 +19,93 @@
                             </div>
                         </div>
                         <div class="col-1 m-0 p-0">
-                            <span class="align-self-end fas fa-circle fa-3x" style="color: gray;"></span>
+                            <span class="align-self-end fas fa-circle fa-3x" style="color: #005E7A;"></span>
                         </div>
                     </div>
                     <br><br><br>
-                    </form>
-                    <form class="text-center form-control border-0 animeted fadeIn" autocomplete="off">
-                    <h2 class="fs-2 text-start m-md-4 mb-5">Información personal</h2>
-                    <input type="text" class="form-control m-md-4 w-50" required [value]="name" placeholder="Nombre">
-                    <input type="text" class="form-control m-md-4 w-50" required [value]="username"  placeholder="Nombre nombre">
-                    <input type="text" class="form-control m-md-4" required [value]="mail" placeholder="Correo">
-                    <div class="input-group m-md-4">
-                        <input type="password" class="form-control" required [value]="password1" placeholder="Contraseña">
-                        <input type="password" class="form-control mx-1" required [value]="password2" placeholder="Repetir contraseña">
+                </form>
+                <form class="text-center form-control border-0 animeted fadeIn" autocomplete="off"
+                    (ngSubmit)="register(forma)" #forma="ngForm">
+                    <h3 class="fs-2 text-start mb-5">Información personal</h3>
+                    <input class="form-control" type="text" placeholder="Nombre completo" name="name"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="name.invalid && name.touched"
+                        [ngModel]="customer.name" #name="ngModel" required>
+                    <input class="form-control my-4 w-50" type="text" placeholder="Telefono" name="phone"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="phone.invalid && phone.touched"
+                        [ngModel]="customer.phone" #phone="ngModel" required>
+                    <input class="form-control my-4 w-50" type="text" placeholder="Cedula" name="id"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="id.invalid && id.touched"
+                        [ngModel]="customer.id" #id="ngModel" required>
+                    <input class="form-control my-4" type="text" placeholder="Correo" name="mail"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="mail.invalid && mail.touched"
+                        [ngModel]="customer.mail" #mail="ngModel" required>
+                    <div class="input-group my-md-4">
+                        <input class="form-control" type="text" required placeholder="Provincia" name="state"
+                            (ngModelChange)="errorLogin=false" [class.is-invalid]="state.invalid && state.touched"
+                            [ngModel]="customer.state" #state="ngModel">
+                        <input class="form-control" type="text" required placeholder="Canton" name="city"
+                            (ngModelChange)="errorLogin=false" [class.is-invalid]="city.invalid && city.touched"
+                            [ngModel]="customer.city" #city="ngModel">
                     </div>
-                    <br><br><br>
-                    <h2 class="fs-2 text-start m-md-4 mb-5">Información de la tienda</h2>
-                    <div class="input-group m-md-4 mb-3">
-                        <label class="input-group-text" for="inputGroupFile01">Seleccionar Imagen</label>
-                        <input type="file" #imgFile required class="form-control" id="inputGroupFile01">
+                    <textarea type="text" class="form-control my-md-4" required placeholder="Otras señas"
+                        name="direction" (ngModelChange)="errorLogin=false"
+                        [class.is-invalid]="direction.invalid && direction.touched" [ngModel]="customer.direction"
+                        #direction="ngModel" style="resize: none;">
+                        </textarea>
+                    <div class="input-group my-4">
+                        <input class="form-control" type="password" required placeholder="Contraseña" name="password1"
+                            (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password1.invalid && password1.touched" [ngModel]="customer.password1"
+                            #password1="ngModel">
+                        <input class="form-control" type="password" required placeholder="Repetir contraseña"
+                            name="password2" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password2.invalid && password2.touched" [ngModel]="customer.password2"
+                            #password2="ngModel">
                     </div>
-                    <input type="text" class="form-control m-md-4" required [value]="shopName" name="user-data"
-                        placeholder="Nombre de la tienda">
-                    <textarea type="text" class="form-control m-md-4" required [value]="description" name="user-data"
-                        placeholder="Descripción">
+                    <small class="text-danger" *ngIf="(password1.value != password2.value) && password2.touched">La
+                        contraseña no coincide</small>
+                    <h3 class="fs-2 text-start mb-5">Información tienda</h3>
+                    <input class="form-control" type="text" required placeholder="Nombre de tienda" name="shopName"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="shopName.invalid && shopName.touched"
+                        [ngModel]="customer.shopName" #shopName="ngModel">
+                    <textarea type="text" class="form-control my-md-4" required name="shopDescription"
+                        placeholder="Descripción" (ngModelChange)="errorLogin=false"
+                        [class.is-invalid]="shopDescription.invalid && shopDescription.touched"
+                        [ngModel]="customer.shopDescription" #shopDescription="ngModel" style="resize: none;">
                     </textarea>
-                    <div class="dropdown text-start m-md-4">
-                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
-                            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Tipo de empredimiento
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li *ngFor="let type of shopTypes"><button class="dropdown-item"
-                                    onclick="setType(type)">{{type}}</button></li>
-                        </ul>
-                    </div>
-                    <div class="input-group m-md-4">
-                        <input type="text" class="form-control" required [value]="state" placeholder="Provincia">
-                        <input type="text" class="form-control mx-1" required [value]="city" placeholder="Canton">
-                    </div>
-                    <textarea type="text" class="form-control m-md-4" required [value]="direction" name="user-data"
-                        placeholder="Otras señas">
-                    </textarea>
+                    <small class="text-danger" *ngIf="errorLogin">{{msgError}}</small>
                     <input type="submit"
                         class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        value="Enviar Solicitud" (click)="register($event, imgFile.value)">
+                        value="Enviar Solicitud" [disabled]="loading">
                 </form>
             </div>
         </div>
     </div>
     <br><br>
 </div>
+
+<!-- Button trigger modal -->
+<button id="BtnOpen" type="button" class="btn btn-primary" [hidden]="true" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{successMsg}}
+        </div>
+        <div class="modal-footer">
+          <a type="button" class="btn bg-el-barrio-golden" data-bs-dismiss="modal" [routerLink]="['/home']">
+            <p> Ir al inicio</p>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

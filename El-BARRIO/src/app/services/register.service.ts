@@ -10,7 +10,7 @@ export class RegisterService {
 
 
 
-  RegisterCustomer(customer:any){
+  registerCustomer(customer:any){
     const url = 'http://localhost:3000/signup/registerConsumidor';
     const body = {
       'password' : customer.password1,
@@ -25,7 +25,7 @@ export class RegisterService {
     return this.http.post(url,body);
   }
 
-  RegisterSeller(seller:any) {
+  registerSeller(seller:any) {
     const url = 'http://localhost:3000/signup/registerConsumidor';
     const body = {
       'password' : seller.password1,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-sigin-seller',
@@ -6,11 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sigin-seller.component.css']
 })
 export class SiginSellerComponent implements OnInit {
-  shopTypes:any = ["Tipo 1", "Tipo 2", "Tipo 3"];
-  
   customer = {
     name: '',
-    username: '',
     password1: '',
     password2: '',
     phone: '',
@@ -18,38 +16,43 @@ export class SiginSellerComponent implements OnInit {
     mail: '',
     state: '',
     city: '',
-    direction: ''
+    direction: '',
+    shopName : '',
+    shopDescription : ''
   }
+  errorLogin:boolean = false;
+  msgError:string = '';
+  loading : boolean = false;
+  successMsg:string = '';
 
-  name:string = '';
-  username:string = '';
-  password1:string = '';
-  password2:string = '';
-  mail:string = '';
-  urlImg:string = '';
-  phone:string = '';
-  id:string = '';
-  shopName:string = '';
-  shopType:string = '';
-  description:string = '';
-  state:string = '';
-  city:string = '';
-  direction:string = '';
-
-  constructor() { }
+  constructor(private registerService : RegisterService) { }
 
   ngOnInit(): void {
   }
 
-  register(event, img) {
+  register(registerForm) {
     event.preventDefault();
-    console.log(img);
-    
-    
-  }
+    if (registerForm.invalid) {
+      Object.values(registerForm.controls).forEach((control: any) => {
+        control.markAsTouched();
 
-  setType(type:string) {
-    this.shopType = type;
+      })
+      return;
+    }
+    this.loading = true;
+    this.registerService.registerSeller(registerForm.value)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.successMsg = data.msg;
+          document.getElementById("BtnOpen").click();
+        } else {
+          this.loading = false;
+          this.msgError = data.msg;
+          this.errorLogin = true;
+        }
+      }, (errorSevice) => {
+      })
+      this.loading = false;
   }
 
 }

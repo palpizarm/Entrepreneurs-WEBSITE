@@ -40,7 +40,7 @@ export class SiginCustomerComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.registerService.RegisterCustomer(registerForm.value)
+    this.registerService.registerCustomer(registerForm.value)
       .subscribe((data: any) => {
         if (data.code > 0) {
           console.log(data);
