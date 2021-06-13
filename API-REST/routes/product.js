@@ -39,7 +39,7 @@ router.post('/getTopProductosDest', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT TOP(8) id_item,name,price FROM ITEM`);
+            .query(`SELECT TOP(8) id_item,name,price FROM ITEM WHERE status = 1`);
         
         res.json({
             code : 1,
@@ -64,7 +64,7 @@ router.post('/getTopProductosNuevos', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT TOP(8) id_item,name,price FROM ITEM
+            .query(`SELECT TOP(8) id_item,name,price FROM ITEM WHERE status = 1
             ORDER BY id_item DESC`);
         
         res.json({
@@ -94,7 +94,7 @@ router.post('/shopShowProducts', async(req,res) => {
         let products =  await poolEB.request()
             .query(`SELECT i.id_item, i.name, i.price
             FROM ITEM i INNER JOIN SHOP s ON i.id_shop = s.id_shop
-            WHERE s.id_shop = ${req.body.id_shop}`);
+            WHERE s.id_shop = ${req.body.id_shop} AND status = 1`);
         
         res.json({
             code : 1,
@@ -123,7 +123,7 @@ router.post('/productSearchBar', async(req,res) => {
         let products =  await poolEB.request()
             .query(`SELECT id_item, name, price
             FROM ITEM
-            WHERE name LIKE '%${req.body.name}%'`);
+            WHERE name LIKE '%${req.body.name}%' AND status = 1`);
         
         res.json({
             code : 1,

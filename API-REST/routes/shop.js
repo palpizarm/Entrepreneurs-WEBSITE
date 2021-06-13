@@ -13,7 +13,9 @@ router.post('/getShops', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let shops =  await poolEB.request()
-            .query(`SELECT * FROM SHOP`);
+            .query(`SELECT * 
+            FROM SHOP
+            WHERE id_shop_status = 1`);
         
         res.json({
             code : 1,
