@@ -112,4 +112,33 @@ router.post('/shopShowProducts', async(req,res) => {
     }
 })
 
+
+//mostrar products por barra de busqueda
+//Body = {"name": //nombre de la busqueda }
+
+router.post('/productSearchBar', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let products =  await poolEB.request()
+            .query(`SELECT id_item, name, price
+            FROM ITEM
+            WHERE name LIKE '%${req.body.name}%'`);
+        
+        res.json({
+            code : 1,
+             msg : '',
+            data : products.recordsets[0]
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo mostrar los productos.',
+            data : error
+        });
+    }
+})
+
 module.exports = router

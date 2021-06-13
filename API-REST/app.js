@@ -24,6 +24,8 @@ const categoryRoute  = require('./routes/category');
 
 const productRoute  = require('./routes/product');
 
+const shopRoute  = require('./routes/shop');
+
 // set routes
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
@@ -31,6 +33,9 @@ app.use('/categoryTop', categoryRoute);
 app.use('/insertProduct', productRoute);
 app.use('/productTop', productRoute);
 app.use('/productShow', productRoute);
+app.use('/productSearch', productRoute);
+app.use('/shopShow', shopRoute);
+app.use('/shopToAprove', shopRoute);
 
 
 
