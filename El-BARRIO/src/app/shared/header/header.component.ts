@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   login() {
@@ -53,4 +54,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  search() {
+    let q = (<HTMLInputElement>document.getElementById("input-search")).value;
+    if (q != '') {
+      this.router.navigate(['search', q]);
+    }
+  }
 }

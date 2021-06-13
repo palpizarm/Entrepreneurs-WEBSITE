@@ -1,7 +1,7 @@
 <div class="card-columns m-5 animated fadeIn">
     <div class="row row-cols-1 row-cols-md-4 g-4 mb-3 animated fadeIn">
         <div class="col"  *ngFor="let item of items">
-            <div class="card puntero" (click)="goToCategorie( categorie )">
+            <div class="card puntero" (click)="goToItem( item )">
                 <img class="card-img-top mx-auto" [src]="item.image | noimage">
                 <div class="card-body text-center">
                     <h4 class="card-title">{{item.name}}</h4>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
   selector: 'app-shops',
@@ -8,19 +9,24 @@ import { Router } from '@angular/router';
 })
 export class ShopsComponent implements OnInit {
   
-  shops:any[] = [1,2,3,4,5,5,6,7,8,9,10];
+  shops:any[];
   
   
-  constructor(private router:Router) { }
+  constructor(private router:Router, private shopService : ShopService) { 
+    this.shopService.getShops()
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.shops = data.data;
+        }
+      })
+  }
 
   ngOnInit(): void {
   }
 
 
   viewShop(shop:any) {
-
-    this.router.navigate(['shop',1]);
-
+    this.router.navigate(['shop',shop.id_shop]);
   }
 
 }

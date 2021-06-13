@@ -22,6 +22,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SiginCustomerComponent } from './components/sigin-customer/sigin-customer.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SiginCustomerComponent } from './components/sigin-customer/sigin-custom
     ItemsComponent,
     NoimagePipe,
     ProfileComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

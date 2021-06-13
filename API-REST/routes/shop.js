@@ -33,6 +33,34 @@ router.post('/getShops', async(req,res) => {
     }
 })
 
+//Obtener información de una tienda
+
+router.get('/getShop/:id', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        let shops =  await poolEB.request()
+            .query(`SELECT * 
+            FROM SHOP s
+            INNER JOIN ENTREPRENEUR e ON s.id_entrepreneur = e.id_entrepreneur
+            INNER JOIN ADDRESS a ON a.id_address = e.address
+            WHERE id_shop = ${req.params.id}`);
+        
+        res.json({
+            code : 1,
+             msg : '',
+            data : shops.recordsets[0][0]
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo mostrar las tiendas.',
+            data : error
+        });
+    }
+})
+
 //Mostrar todas las tiendas pero al Admin
 
 router.post('/getShopsAdmin', async(req,res) => {

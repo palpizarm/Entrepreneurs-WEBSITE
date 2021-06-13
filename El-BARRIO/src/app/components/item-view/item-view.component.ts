@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-view',
@@ -12,10 +13,20 @@ export class ItemViewComponent implements OnInit {
     name : '',
     price : '',
   }
-  rating:any[] = ['fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x','fa fa-star fa-2x'];
-  constructor() { }
   items:any[] = [1,2,3];
+  rating:any[] = ['fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x','fa fa-star fa-2x'];
+  
+  constructor(private router : ActivatedRoute) {
+    this.router.params.subscribe(params => {
+      this.getItemInformation(params['id']);
+    })
+   }
+  
   ngOnInit(): void {
+  }
+
+  getItemInformation(id:string) {
+
   }
 
   quantityAdd() {

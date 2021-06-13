@@ -1,24 +1,25 @@
 <div class="px-5 mt-5 animated fadeIn">
-    <div class="row m-5">
-        <div class="col-4 mt-5">
-            <img [src]=" shop.img | noimage" alt="" srcset="">
+    <div class="row mx-5">
+        <div class="col-4">
+            <img class="card-img-top mx-auto" [src]="shop.image | noimage">
         </div>
         <div class="col-8">
-            <div class="container m-5">
-                <h3 class="fs-1 my-1">Zapateria Brand</h3>
-                <div class="col-8">
-                    <p class="fs-5 my-5 me-5 ">Somos una zapatería que busca el estilo
-                        en cada calzado, hacer divertido cada
-                        paso y disfrutar cada momento del camino.</p>
-                </div>
-                <button type="button" class="btn btn-lg d-block m-2 rounded-pill">Dirección</button>
-                <button type="button" class="btn btn-lg d-block m-2 rounded-pill">Contacto</button>
+            <h3 class="fs-1 my-1">{{shop.name}}</h3>
+            <div class="col-8">
+                <p class="fs-5 my-5 me-5 ">{{shop.description}}</p>
             </div>
+            <h5 class="fs-5 my-1">
+                <i class="bi bi-geo-alt color-el-barrio-blue"></i>
+                {{shop.state}},
+                {{shop.city}},
+                {{shop.address_opt}}
+            </h5>
+            <button type="button" class="btn btn-lg d-block my-5 rounded-pill">Contacto</button>
         </div>
     </div>
     <hr style="height: 5px; background: black;">
     <div class="row">
-            <label>Articulos: {{items.length}}</label>
-            <app-items [items]="items"></app-items>
+        <label>Articulos: {{items.length}}</label>
+        <app-items [items]="items"></app-items>
     </div>
 </div>

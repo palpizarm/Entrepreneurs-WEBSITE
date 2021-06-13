@@ -7,6 +7,7 @@ import { InformationComponent } from './components/information/information.compo
 import { ItemViewComponent } from './components/item-view/item-view.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
 import { ShopViewComponent } from './components/shop-view/shop-view.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShopsComponent } from './components/shops/shops.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'registerSeller', component: SiginSellerComponent},
   { path: 'profileInformation', component: ProfileComponent},
   { path: 'shopping-cart', component: ShoppingCartComponent},
+  { path: 'search/:q', component: SearchComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];

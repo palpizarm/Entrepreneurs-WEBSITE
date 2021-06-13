@@ -16,10 +16,10 @@
             <div class="d-flex justify-content-end col-sm-8 col-md-9">
                 <div class="col-sm-5 col-md-5 mx-5">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
+                        <input id="input-search" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
                             aria-describedby="barra de busqueda">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">
+                            <button class="btn btn-outline-secondary" type="button" (click)="search()">
                                 <i class="bi bi-search text-white"></i>
                             </button>
                         </div>
@@ -37,7 +37,7 @@
         <div class="row bg-white">
             <div class="col-sm-0 col-md-1">
                 <a routerLink="home">
-                <img class="m-2" src="../../../assets/img/icon.png" style="width: 90px; height: 90px;">
+                <img class="m-2" src="../../../assets/img/icon.png" style="width: 80px; height: 80px;">
                 </a>
             </div>
             <div class="col-sm-12 col-md-11">

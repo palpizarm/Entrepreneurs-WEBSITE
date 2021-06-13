@@ -23,6 +23,11 @@ body {
     background-color: #005E7A;
     color: #FFFFFF;
 }
+
+.color-el-barrio-blue {
+    color: #005E7A;
+}
+
 .bg-el-barrio-golden {
     background-color: #7C4E04;
     color: #FFFFFF;

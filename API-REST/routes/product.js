@@ -171,7 +171,7 @@ router.post('/getProductsToAprove', async(req,res) => {
 
 //Update de estado de los productos
 
-router.post('/getProductUpdate', async(req,res) => {
+router.post('/ProductStateUpdate', async(req,res) => {
     try {
         let poolEB = await sql.connect(dbElbarrio);
         
