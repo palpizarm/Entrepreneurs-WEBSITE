@@ -36,6 +36,7 @@ app.use('/productShow', productRoute);
 app.use('/productSearch', productRoute);
 app.use('/shopShow', shopRoute);
 app.use('/shopToAprove', shopRoute);
+app.use('/updateShop', shopRoute);
 
 
 

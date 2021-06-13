@@ -61,7 +61,30 @@ router.post('/getShopToAprove', async(req,res) => {
     }
 })
 
+//Update de estado de tienda
 
+router.post('/getShopUpdate', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let shops =  await poolEB.request()
+            .query(`Update SHOP Set id_shop_status = ${req.body.id_shop_status} Where id_shop = ${req.body.id_shop}`);
+        
+        res.json({
+            code : 1,
+             msg : 'El estado fue cambiado exitosamente.',
+            data : {}
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo actualizar el estado de la tienda.',
+            data : error
+        });
+    }
+})
 
 
 
