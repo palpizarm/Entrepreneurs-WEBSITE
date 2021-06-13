@@ -29,6 +29,7 @@ app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/categoryTop', categoryRoute);
 app.use('/insertProduct', productRoute);
+app.use('/productTop', productRoute);
 
 
 
