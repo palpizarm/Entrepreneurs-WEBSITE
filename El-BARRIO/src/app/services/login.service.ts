@@ -6,12 +6,6 @@ import { Injectable } from '@angular/core';
 })
 export class LoginService {
 
-  static USER = {
-    id : -1,
-    username : 'Iniciar Sesión',
-    password : ''
-  }
-
   constructor(private http:HttpClient) { 
 
   }

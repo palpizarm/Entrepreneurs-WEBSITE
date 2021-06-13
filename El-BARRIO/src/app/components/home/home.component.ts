@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemscategoriesService } from 'src/app/services/itemscategories.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +8,35 @@ import { ItemscategoriesService } from 'src/app/services/itemscategories.service
 })
 export class HomeComponent implements OnInit {
 
-  categories:any = [];
+  categories: any = [];
+  bestSellerItems: any = [];
+  newItems: any = [];
 
-  constructor(private categoriesService:ItemscategoriesService) { 
-    this.categoriesService.getTopCategories()
-      .subscribe((data:any) => {
+  constructor(private homeService: HomeService) {
+    this.homeService.getTopCategories()
+      .subscribe((data: any) => {
         if (data.code > 0) {
-          (data.data).forEach( categorie => {
-            this.categories.push(categorie.name);
-          });
+            this.categories = data.data;
         }
-      },(error) => {
+      }, (error) => {
+        console.log(error);
       })
+    this.homeService.getBestSellerItems()
+      .subscribe((data: any) => {
+        if (data.code > 0) {
+          this.bestSellerItems = data.data;
+        }
+      }, (error) => { })
+    this.homeService.getTopNewItems()
+      .subscribe((data: any) => {
+        if (data.code > 0) {
+          this.newItems = data.data;
+        }
+      }, (error) => { })
   }
 
   ngOnInit(): void {
   }
+
 
 }

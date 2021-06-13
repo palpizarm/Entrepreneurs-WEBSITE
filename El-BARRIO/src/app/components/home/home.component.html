@@ -7,20 +7,15 @@
                         <h2>Tendencias</h2>
                     </div>
                 </div>
-                <div class="card-columns m-5 animated fadeIn">
-                        <ul class="text-center">
-                            <li class="border-white d-inline-block mb-1 w-25" *ngFor="let categorie of categories">
-                                <a [routerLink]="['/routePath']">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="../../../assets/img/no-image-found.png" class="card-img-top rounded"
-                                            alt="imagen no disponible">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{categorie}}</h4>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
+                <div class="row row-cols-1 row-cols-md-4 g-4 mb-3 animated fadeIn">
+                    <div class="col" *ngFor="let categorie of categories">
+                        <div class="card puntero" (click)="goToCategorie( categorie )">
+                            <img class="card-img-top mx-auto" [src]="categorie.image | noimage">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">{{ categorie.name }}</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -30,7 +25,7 @@
                         <h2>Productos destacados</h2>
                     </div>
                 </div>
-                <app-items [items]="categories"></app-items>
+                <app-items [items]="bestSellerItems"></app-items>
             </div>
 
             <div class="row">
@@ -39,7 +34,7 @@
                         <h2>Productos nuevos</h2>
                     </div>
                 </div>
-                <app-items [items]="categories"></app-items>
+                <app-items [items]="newItems"></app-items>
             </div>
         </div>
     </div>

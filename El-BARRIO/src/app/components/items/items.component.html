@@ -1,15 +1,13 @@
 <div class="card-columns m-5 animated fadeIn">
-    <ul class="text-center">
-        <li class="border-white d-md-inline-block w-25 mb-1" *ngFor="let item of items">
-            <a [routerLink]="['/itemView/' + item]">
-                <div class="card" style="width: 18rem;">
-                    <img [src]=" item.image| noimage" class="card-img-top rounded" alt="imagen no disponible">
-                    <div class="card-body">
-                        <h4 class="card-title">{{item}}</h4>
-                        <h5>{{5000|currency: 'CRC':'symbol-narrow'}}</h5>
-                    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4 mb-3 animated fadeIn">
+        <div class="col"  *ngFor="let item of items">
+            <div class="card puntero" (click)="goToCategorie( categorie )">
+                <img class="card-img-top mx-auto" [src]="item.image | noimage">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{item.name}}</h4>
+                    <h5>{{item.price|currency: 'CRC':'symbol-narrow'}}</h5>
                 </div>
-            </a>
-        </li>
-    </ul>
+            </div>
+        </div>
+    </div>
 </div>
