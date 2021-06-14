@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/class/user';
 
 
 @Component({
@@ -8,46 +9,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
-  session:string = "Perfil";
-  userLogin: boolean = false;
-  
-  constructor(public router : Router) { 
-    if (localStorage.getItem('user-session')) {
-      try {
-        var user = JSON.parse(localStorage.getItem('user-session'));
-        this.session = user.user_name;
-        this.userLogin = true;
-      } catch(error) {
-        localStorage.removeItem('user-session');
-      }
+  loginSession:boolean = User.sessionIn;
+  session:string = User.displayName;
 
-    }
+  constructor(public router : Router) { 
   }
 
   ngOnInit(): void {
+    document.addEventListener('mousemove', ()=> {
+      if (localStorage.getItem('session')) {
+        this.loginSession = true;
+      }
+    })
     
   }
 
   login() {
-    if (localStorage.getItem("user-session")) {
+    if (localStorage.getItem('session')) {
       this.router.navigate(["/profileInformation"]);
-      this.userLogin = true;
     } else {
       this.router.navigate(['/login']);
     }
   }
 
   logout() {
-    this.userLogin = false;
-    localStorage.removeItem("user-session");
-    this.session = 'Iniciar Sesión';
-    window.location.reload();
-
+    User.logout();
+    localStorage.removeItem('session');
+    this.router.navigate(['home']);
   }
 
   goShoppingCart() {
-    if (localStorage.getItem("user-session")) {
+    if (User.isSession()) {
       this.router.navigate(["/shopping-cart"]);
     } else {
       this.router.navigate(['/login']);

@@ -1,44 +1,163 @@
 <div class="px-5 mt-5 animated fadeIn">
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <div class="list-group">
-                <div>
-                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
-                        (click)="showTab(0);">Información personal</button>
-                </div>
-                <div *ngIf="customerFlag">
-                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
-                        (click)="showTab(1);">
-                        Historial de compra
-                    </button>
-                </div>
-                <div *ngIf="!customerFlag">
-                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
-                        (click)="showTab(2);">
-                        Lista de productos
-                    </button>
-                </div>
-                <div *ngIf="!customerFlag">
-                    <button type="button" class="btn btn-outline-secondary border-0 list-group-item text-start"
-                        (click)="showTab(3);">
-                        Historial de venta
-                    </button>
-                </div>
-                <br>
+                <button [hidden]="!customerFlag" type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[0], 'text-white' : options[0]}" (click)="changeContent(0)">
+                    Información personal
+                </button>
+                <button [hidden]="!customerFlag" type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[1], 'text-white' : options[1]}" (click)="changeContent(1)">
+                    Historial de compra
+                </button>
+                <button [hidden]="customerFlag" type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[2], 'text-white' : options[2]}" (click)="changeContent(2)">
+                    Lista de productos
+                </button>
+                <button [hidden]="customerFlag" type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[3], 'text-white' : options[3]}" (click)="changeContent(3)">
+                    Historial de venta
+                </button>
             </div>
         </div>
-        <div class="col-9">
-            <div *ngIf="tabs[0]">
-                <p>Información personal</p>
+        <!--Personal information-->
+        <div class="col-10">
+            <div *ngIf="options[0]">
+                <button class="btn float-end mb-2" (click)="readonlyInfo = !readonlyInfo">
+                    <i *ngIf="readonlyInfo" class="fas fa-pencil-alt fa-2x"></i>
+                    <i *ngIf="!readonlyInfo" class="fas fa-window-close fa-2x"></i>
+                </button>
+                <form class="text-center border-0" autocomplete="off" #forma="ngForm"
+                    (ngSubmit)="registerCustomer(forma)">
+                    <input [disabled]="readonlyInfo" class="form-control" type="text" placeholder="Nombre completo"
+                        name="name" (ngModelChange)="errorLogin=false" [class.is-invalid]="name.invalid && name.touched"
+                        [ngModel]="customer.name" #name="ngModel" required>
+                    <input [disabled]="readonlyInfo" class="form-control my-4 w-50" type="text" placeholder="Telefono"
+                        name="phone" (ngModelChange)="errorLogin=false"
+                        [class.is-invalid]="phone.invalid && phone.touched" [ngModel]="customer.phone" #phone="ngModel"
+                        required>
+                    <input [disabled]="readonlyInfo" class="form-control my-4 w-50" type="text" placeholder="Cedula"
+                        name="id" (ngModelChange)="errorLogin=false" [class.is-invalid]="id.invalid && id.touched"
+                        [ngModel]="customer.id" #id="ngModel" required>
+                    <input [disabled]="readonlyInfo" class="form-control my-4" type="text" placeholder="Correo"
+                        name="mail" (ngModelChange)="errorLogin=false" [class.is-invalid]="mail.invalid && mail.touched"
+                        [ngModel]="customer.mail" #mail="ngModel" required>
+                    <div class="input-group my-md-4">
+                        <input [disabled]="readonlyInfo" class="form-control" type="text" required
+                            placeholder="Provincia" name="state" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="state.invalid && state.touched" [ngModel]="customer.state"
+                            #state="ngModel">
+                        <input [disabled]="readonlyInfo" class="form-control" type="text" required placeholder="Canton"
+                            name="city" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="city.invalid && city.touched" [ngModel]="customer.city" #city="ngModel">
+                    </div>
+                    <textarea [disabled]="readonlyInfo" type="text" class="form-control my-md-4" required
+                        placeholder="Otras señas" name="direction" (ngModelChange)="errorLogin=false"
+                        [class.is-invalid]="direction.invalid && direction.touched" [ngModel]="customer.direction"
+                        #direction="ngModel" style="resize: none;">
+                         </textarea>
+                    <div class="input-group my-4">
+                        <input [disabled]="readonlyInfo" class="form-control" type="password" required
+                            placeholder="Contraseña" name="password1" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password1.invalid && password1.touched" [ngModel]="customer.password1"
+                            #password1="ngModel">
+                        <input [disabled]="readonlyInfo" class="form-control" type="password" required
+                            placeholder="Repetir contraseña" name="password2" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password2.invalid && password2.touched" [ngModel]="customer.password2"
+                            #password2="ngModel">
+                    </div>
+                    <small class="text-danger" *ngIf="(password1.value != password2.value) && password2.touched">La
+                        contraseña no coincide</small>
+                    <small class="text-danger" *ngIf="errorLogin">{{msgError}}</small>
+                    <br>
+                    <input type="submit"
+                        class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                        value="Registrarme" [disabled]="loading || readonlyInfo">
+                </form>
             </div>
-            <div *ngIf="tabs[1]">
-                <p>Historial de compra</p>
+            <!--Pucharses history-->
+            <div *ngIf="options[1]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let item of items">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-block" role="group">
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="tabs[2]">
-                <p>Lista de productos</p>
+            <!--Items shop product-->
+            <div *ngIf="options[2]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let item of items">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-block" role="group">
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Modificar</button>
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Deshabilitar</button>
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Habilitar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="tabs[3]">
-                <p>Historial de venta</p>
+            <!--Sales History-->
+            <div *ngIf="options[3]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let item of items">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-block" role="group">
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 const dbconfig = require('../dbconfig');
 const dbUsersConfig = dbconfig.dbUsers;
+const dbElbarrioConfig = dbconfig.dbElbarrio;
 const express = require('express');
 const router = express.Router();
 const sql = require('mssql');
@@ -11,32 +12,27 @@ router.post('/getSession', async (req, res) => {
         let pool = await sql.connect(dbUsersConfig);
         let users = await pool.request()
             .query(`SELECT * FROM USERS U 
-                    INNER JOIN USER_TYPE T ON T.id = U.user_type
-                    WHERE user_name = '${req.body.username}' AND password = '${req.body.password}'`);
-
-        if (Object.keys(users.recordsets[0]).length == 0) {
-
-
-            //BD_ELBARRIO
-            sql.close();
-            let poolEB = await sql.connect(dbElbarrio);
-            let resBd = await poolEB.request()
-                .query(`SELECT TOP(1) *
-            FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 
-            inner join ADDRESS a on c.address = a.id_address
-            ORDER BY u.id_user DESC`);
-
+                    WHERE U.user_name = '${req.body.username}' AND U.password = '${req.body.password}'`);
+        if ((users.recordsets[0]).length == 0) {
             res.json({
                 code: -1,
-                msg: 'El usuario o la contraseña invalido',
+                msg: 'El usuario o la contraseña es invalida',
                 data: resBd.recordsets[0]
             });
-            sql.close();
         } else {
+            //BD_ELBARRIO
+            sql.close();
+            let poolEB = await sql.connect(dbElbarrioConfig);
+            let resBd = await poolEB.request()
+                .query(`SELECT *
+                FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 
+                inner join ADDRESS a on c.address = a.id_address
+                WHERE u.email = '${req.body.username}'
+                ORDER BY u.id_user DESC`);
             res.json({
                 code: 1,
                 msg: '',
-                data: users.recordsets[0]
+                data: resBd.recordsets[0]
             });
         }
     }

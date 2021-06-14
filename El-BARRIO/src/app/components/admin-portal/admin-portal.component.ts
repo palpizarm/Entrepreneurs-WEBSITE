@@ -64,16 +64,16 @@ export class AdminPortalComponent implements OnInit {
     }
     this.options[opt] = true;
     switch (opt) {
-      case 0:
+      case 0: // show all shops
         this.getAllShops();
         break;
-      case 1:
+      case 1: // show shops to aprove
         this.getShopsToAprove();
         break;
-      case 2:
+      case 2: // show questions 
         this.getQuestions();
         break;
-      case 3:
+      case 3: // show admin form
         break;
       default:
         break;

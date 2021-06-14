@@ -46,11 +46,12 @@ router.post('/registerConsumidor', async(req,res) => {
 
             //respuesta
             let resBd = await poolEB.request()
-            .query(`SELECT TOP(1) *
+            .query(`SELECT *
             FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 
             inner join ADDRESS a on c.address = a.id_address
+            WHERE u.email = '${req.body.email}'
             ORDER BY u.id_user DESC`);
-
+            
             res.json({
                 code : 1,
                 msg : '',

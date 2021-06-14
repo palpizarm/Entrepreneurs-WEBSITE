@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { User } from 'src/app/class/user';
+import { Parser } from '@angular/compiler/src/ml_parser/parser';
 
 @Component({
   selector: 'app-login',
@@ -28,9 +30,6 @@ export class LoginComponent implements OnInit {
 
 
   startLogin(loginForm: any) {
-    if (localStorage.getItem('user-session')) {
-      localStorage.removeItem('user-session');
-    }
     if (loginForm.invalid) {
       Object.values(loginForm.controls).forEach((control: any) => {
         control.markAsTouched();
@@ -41,9 +40,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.login.getLogin(loginForm.value.username, loginForm.value.password)
       .subscribe((data: any) => {
+        console.log(data);
         if (data.code > 0) {
           let user = data.data[0];
-          localStorage.setItem('user-session', JSON.stringify(user));
+          localStorage.setItem('session', JSON.stringify(user))
+          User.setData(user);
           this.router.navigate(['/home']);
         }
         else {

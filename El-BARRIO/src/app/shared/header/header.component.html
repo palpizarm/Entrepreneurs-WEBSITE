@@ -4,7 +4,7 @@
             <div class="col-sm-4 col-md-3">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-secondary"
-                        (click)="logout()" [disabled]='!userLogin'>
+                        (click)="logout()" [disabled]='!loginSession'>
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary text-white" (click)="login()">
