@@ -57,9 +57,9 @@
                                             aria-label="Basic outlined example">
                                             <button type="button" (click)="viewShop(shop)"
                                                 class="btn bg-el-barrio-blue rounded-pill">Detalles</button>
-                                            <button type="button" (click)="suspender(shop)"
+                                            <button type="button" (click)="viewModalTo(3,shop)"
                                                 class="btn bg-el-barrio-dark-blue rounded-pill">Suspender</button>
-                                            <button type="button" (click)="blockShop(shop)"
+                                            <button type="button" (click)="viewModalTo(2,shop)"
                                                 class="btn bg-el-barrio-golden rounded-pill">Bloquear</button>
                                         </div>
                                     </div>
@@ -88,10 +88,10 @@
                                                     class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
                                             </div>
                                             <div class="btn-group d-flex justify-content-around" role="group">
-                                                <button type="button" class="btn">Aprobar
+                                                <button type="button" class="btn" (click)="viewModalTo(0,shop)">Aprobar
                                                     <i class="far fa-check-circle fa-3x d-block"></i>
                                                 </button>
-                                                <button type="button" class="btn">Rechazar
+                                                <button type="button" class="btn" (click)="viewModalTo(1,shop)">Rechazar
                                                     <i class="far fa-times-circle fa-3x d-block"></i>
                                                 </button>
                                             </div>
@@ -107,24 +107,22 @@
             <!--Questions-->
             <div *ngIf="options[2]">
                 <div class="row row-cols-1 g-4">
-                    <div class="card border-0" *ngFor="let shop of shops">
+                    <div class="card border-0" *ngFor="let question of shops">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-3">
-                                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image| noimage">
-                                    <h3 class="text-center fs-4 fw-bold">{{shop.name}}</h3>
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="question.image| noimage">
                                 </div>
-                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
-                                    <div class="w-100">
-                                        <div class="btn-group d-flex justify-content-around" role="group"
-                                            aria-label="Basic outlined example">
-                                            <button type="button" class="btn btn-outline-primary"
-                                                >Detalles</button>
-                                            <button type="button" class="btn btn-outline-primary"
-                                                >Suspender</button>
-                                            <button type="button" class="btn btn-outline-primary"
-                                                >Bloquear</button>
-                                        </div>
+                                <div class="col-sm-12 col-md-9">
+                                    <h3 class="fs-4 fw-bold">{{question.name}}</h3>
+                                    <p>{{question.description}}</p>
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="text-reponse" style="height: 100px; resize: none;"></textarea>
+                                        <label for="floatingTextarea2">Respuesta</label>
+                                      </div>
+                                      <div class="mt-2 d-flex justify-content-center">
+                                        <button type="button" (click)="response(question)"
+                                            class="w-50 btn bg-el-barrio-blue rounded-pill">Responder</button>
                                     </div>
                                 </div>
                             </div>
@@ -226,26 +224,25 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aproveShop">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="aproveShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<button id="btn-modal" type="button" data-bs-toggle="modal" data-bs-target="#modalToConfirm">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalToConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{msgList[optionToDo]}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="actionEjecut()">Si</button>
+            </div>
         </div>
-        <div class="modal-body">
-          Desea aceptar la tienda
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button type="button" class="btn btn-primary">Si</button>
-        </div>
-      </div>
     </div>
-  </div>
-  
+</div>

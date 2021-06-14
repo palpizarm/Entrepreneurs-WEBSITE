@@ -25,7 +25,14 @@ export class AdminPortalComponent implements OnInit {
     direction: ''
   }
   shops: any[] = [];
-  shopDetails:any = {};
+  shopDetails: any = {};
+  optionToDo: number = 0;
+  msgList: string[] = [
+    '¿Esta seguro que desea aprobar la solicitud de la tienda?',
+    '¿Esta seguro que desea rechazar la solicitud de la tienda?',
+    '¿Esta seguro que desea bloquear de forma permanente a la tienda?',
+    'La tienda será suspendida por 15 días. ¿Esta seguro?'
+  ]
 
   constructor(public router: Router, private shopService: ShopService) {
     if (localStorage.getItem('user-session')) {
@@ -61,7 +68,7 @@ export class AdminPortalComponent implements OnInit {
         this.getAllShops();
         break;
       case 1:
-      this.getShopsToAprove();
+        this.getShopsToAprove();
         break;
       case 2:
         this.getQuestions();
@@ -96,8 +103,9 @@ export class AdminPortalComponent implements OnInit {
 
   }
 
-  answerQuestion() {
-
+  response(question) {
+    let response = (<HTMLInputElement>document.getElementById("text-reponse")).value;
+    console.log(question,response);
   }
 
   registerAdmin(registerForm) {
@@ -115,8 +123,8 @@ export class AdminPortalComponent implements OnInit {
     this.shopDetails = {};
     document.getElementById('btn-show-shop').click();
     this.shopService.getShopById(shop.id_shop)
-      .subscribe((data:any) => {
-        if(data.code > 0) {
+      .subscribe((data: any) => {
+        if (data.code > 0) {
           this.shopDetails = data.data;
           console.log(this.shopDetails);
         }
@@ -125,12 +133,31 @@ export class AdminPortalComponent implements OnInit {
       })
   }
 
-  suspender(shop) {
-
+  viewModalTo(option, shop) {
+    this.shopDetails = shop;
+    this.optionToDo = option;
+    document.getElementById('btn-modal').click()
   }
 
-  blockShop(shop) {
 
+  actionEjecut() {
+    // aproveOption
+    if (this.optionToDo == 0) {
+      console.log('aprove shop');
+    }
+    // reject option
+    else if (this.optionToDo == 1) {
+      console.log('reject option');
+    }
+    // block shop
+    else if (this.optionToDo == 2) {
+      console.log('block shop');
+    }
+    // suspender shop
+    else if (this.optionToDo == 3) {
+      console.log('suspender shop');
+    }
   }
+
 
 }
