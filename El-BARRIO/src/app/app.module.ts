@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SiginCustomerComponent } from './components/sigin-customer/sigin-customer.component';
 import { SearchComponent } from './components/search/search.component';
+import { AdminPortalComponent } from './components/admin-portal/admin-portal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SearchComponent } from './components/search/search.component';
     NoimagePipe,
     ProfileComponent,
     ShoppingCartComponent,
-    SearchComponent
+    SearchComponent,
+    AdminPortalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,251 @@
+<div class="navbar-nav sticky-top bg-dark pt-1">
+    <div class="row py-2">
+        <div class="col-10">
+            <a routerLink="home">
+                <img class="m-2" src="../../../assets/img/icon.png" style="width: 80px; height: 80px;">
+            </a>
+        </div>
+        <div class="float-end col">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-secondary" (click)="logout()" [disabled]='!userLogin'>
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button type="button" class="btn btn-outline-secondary text-white">
+                    <i class="bi bi-person-circle"></i>
+                    <span class="align-middle ms-2">{{session | uppercase}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="px-5 mt-5 animated fadeIn">
+    <div class="row">
+        <div class="col-2">
+            <div class="list-group">
+                <button type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[0], 'text-white' : options[0]}" (click)="changeContent(0)">
+                    Lista de emprendimientos
+                </button>
+                <button type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[1], 'text-white' : options[1]}" (click)="changeContent(1)">
+                    Tiendas por aprobar
+                </button>
+                <button type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[2], 'text-white' : options[2]}" (click)="changeContent(2)">
+                    Consultas-Quejas
+                </button>
+                <button type="button" class="btn border-0 list-group-item text-start"
+                    [ngClass]="{'bg-dark': options[3], 'text-white' : options[3]}" (click)="changeContent(3)">
+                    Agregar administrador
+                </button>
+            </div>
+        </div>
+        <!--All shops-->
+        <div class="col-10">
+            <div *ngIf="options[0]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let shop of shops">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{shop.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-flex justify-content-around" role="group"
+                                            aria-label="Basic outlined example">
+                                            <button type="button" (click)="viewShop(shop)"
+                                                class="btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                            <button type="button" (click)="suspender(shop)"
+                                                class="btn bg-el-barrio-dark-blue rounded-pill">Suspender</button>
+                                            <button type="button" (click)="blockShop(shop)"
+                                                class="btn bg-el-barrio-golden rounded-pill">Bloquear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <!--Shops to aprove-->
+            <div *ngIf="options[1]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let shop of shops">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{shop.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-block" role="group">
+                                            <div class="d-flex justify-content-center">
+                                                <button type="button" (click)="viewShop(shop)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                            </div>
+                                            <div class="btn-group d-flex justify-content-around" role="group">
+                                                <button type="button" class="btn">Aprobar
+                                                    <i class="far fa-check-circle fa-3x d-block"></i>
+                                                </button>
+                                                <button type="button" class="btn">Rechazar
+                                                    <i class="far fa-times-circle fa-3x d-block"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <!--Questions-->
+            <div *ngIf="options[2]">
+                <div class="row row-cols-1 g-4">
+                    <div class="card border-0" *ngFor="let shop of shops">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{shop.name}}</h3>
+                                </div>
+                                <div class="col-sm-12 col-md-9 d-flex align-items-center">
+                                    <div class="w-100">
+                                        <div class="btn-group d-flex justify-content-around" role="group"
+                                            aria-label="Basic outlined example">
+                                            <button type="button" class="btn btn-outline-primary"
+                                                >Detalles</button>
+                                            <button type="button" class="btn btn-outline-primary"
+                                                >Suspender</button>
+                                            <button type="button" class="btn btn-outline-primary"
+                                                >Bloquear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <!--Register new admin-->
+            <div *ngIf="options[3]">
+                <form class="text-center border-0 px-5 mx-5" autocomplete="off" #forma="ngForm"
+                    (ngSubmit)="registerAdmin(forma)">
+                    <input class="form-control" type="text" placeholder="Nombre completo" name="name"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="name.invalid && name.touched"
+                        [ngModel]="admin.name" #name="ngModel" required>
+                    <input class="form-control my-4 w-50" type="text" placeholder="Telefono" name="phone"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="phone.invalid && phone.touched"
+                        [ngModel]="admin.phone" #phone="ngModel" required>
+                    <input class="form-control my-4 w-50" type="text" placeholder="Cedula" name="id"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="id.invalid && id.touched"
+                        [ngModel]="admin.id" #id="ngModel" required>
+                    <input class="form-control my-4" type="text" placeholder="Correo" name="mail"
+                        (ngModelChange)="errorLogin=false" [class.is-invalid]="mail.invalid && mail.touched"
+                        [ngModel]="admin.mail" #mail="ngModel" required>
+                    <div class="input-group my-md-4">
+                        <input class="form-control" type="text" required placeholder="Provincia" name="state"
+                            (ngModelChange)="errorLogin=false" [class.is-invalid]="state.invalid && state.touched"
+                            [ngModel]="admin.state" #state="ngModel">
+                        <input class="form-control" type="text" required placeholder="Canton" name="city"
+                            (ngModelChange)="errorLogin=false" [class.is-invalid]="city.invalid && city.touched"
+                            [ngModel]="admin.city" #city="ngModel">
+                    </div>
+                    <textarea type="text" class="form-control my-md-4" required placeholder="Otras señas"
+                        name="direction" (ngModelChange)="errorLogin=false"
+                        [class.is-invalid]="direction.invalid && direction.touched" [ngModel]="admin.direction"
+                        #direction="ngModel" style="resize: none;">
+                     </textarea>
+                    <div class="input-group my-4">
+                        <input class="form-control" type="password" required placeholder="Contraseña" name="password1"
+                            (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password1.invalid && password1.touched" [ngModel]="admin.password1"
+                            #password1="ngModel">
+                        <input class="form-control" type="password" required placeholder="Repetir contraseña"
+                            name="password2" (ngModelChange)="errorLogin=false"
+                            [class.is-invalid]="password2.invalid && password2.touched" [ngModel]="admin.password2"
+                            #password2="ngModel">
+                    </div>
+                    <small class="text-danger" *ngIf="(password1.value != password2.value) && password2.touched">La
+                        contraseña no coincide</small>
+                    <small class="text-danger" *ngIf="errorLogin">{{msgError}}</small>
+                    <br>
+                    <input type="submit"
+                        class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                        value="Registrar administrador" [disabled]="loading">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar navbar-default d-block navbar-fixed-bottom pt-3 bg-dark w-100">
+    <div class="row text-white">
+        <div class="mx-auto">
+            <img src="../../../assets/img/iconBlack.png" style="width: 200px; height: 200px;">
+        </div>
+        <div class="mx-5"><small class="fw-bold fs-4">Tienda El Barrio ®</small></div>
+    </div>
+</div>
+
+
+<!--To show shop information-->
+<!-- Button trigger modal -->
+<button id="btn-show-shop" type="button" [hidden]="true" data-bs-toggle="modal" data-bs-target="#shopDetails">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="shopDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h1>{{shopDetails.name}}</h1>
+                <h4>{{shopDetails.description}}</h4>
+                <h5 class="fs-5 my-1">
+                    <i class="bi bi-geo-alt color-el-barrio-blue"></i>
+                    {{shopDetails.state}},
+                    {{shopDetails.city}},
+                    {{shopDetails.address_opt}}
+                </h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#aproveShop">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="aproveShop" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmar acción</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Desea aceptar la tienda
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-primary">Si</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

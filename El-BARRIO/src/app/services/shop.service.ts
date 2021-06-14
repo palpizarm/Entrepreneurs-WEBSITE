@@ -24,4 +24,23 @@ export class ShopService {
     const url = `http://localhost:3000/shopShow/getShop/${id}`;
     return this.http.get(url);
   }
+
+  getAllShopAdmin() {
+    const url = `http://localhost:3000/shopShow/getShopsAdmin`;
+    return this.http.post(url,{});
+  }
+
+  getShopTopAprove() {
+    const url = `http://localhost:3000/shopShow/getShopToAprove`;
+    return this.http.post(url,{});
+  }
+
+  updateShopState(newState:number, idShop:number) {
+    const url = `http://localhost:3000/shopShow/getShopToAprove`;
+    const body = {
+      'id_shop_status' : newState,
+      'id_shop' : idShop
+    }
+    return this.http.post(url,body);
+  }
 }

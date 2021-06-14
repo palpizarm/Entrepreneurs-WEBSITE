@@ -69,7 +69,8 @@ router.post('/getShopsAdmin', async(req,res) => {
         
         let shops =  await poolEB.request()
             .query(`SELECT * 
-            FROM SHOP`);
+            FROM SHOP
+            where id_shop_status != 2`);
         
         res.json({
             code : 1,

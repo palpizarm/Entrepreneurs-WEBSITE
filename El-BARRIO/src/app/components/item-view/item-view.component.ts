@@ -14,7 +14,7 @@ export class ItemViewComponent implements OnInit {
     price : '',
   }
   items:any[] = [1,2,3];
-  rating:any[] = ['fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x','fa fa-star fa-2x'];
+  rating:any[] = ['fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGray','fa fa-star fa-2x starGray'];
   
   constructor(private router : ActivatedRoute) {
     this.router.params.subscribe(params => {

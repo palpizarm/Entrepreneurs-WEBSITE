@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddItemComponent } from './components/add-item/add-item.component';
+import { AdminPortalComponent } from './components/admin-portal/admin-portal.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { HomeComponent } from './components/home/home.component';
 import { InformationComponent } from './components/information/information.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'profileInformation', component: ProfileComponent},
   { path: 'shopping-cart', component: ShoppingCartComponent},
   { path: 'search/:q', component: SearchComponent },
+  { path: 'admin-portal', component: AdminPortalComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
