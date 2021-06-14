@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HomeService } from 'src/app/services/home.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   bestSellerItems: any = [];
   newItems: any = [];
 
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, private router : Router ) {
     this.homeService.getTopCategories()
       .subscribe((data: any) => {
         if (data.code > 0) {
@@ -36,6 +37,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+
+  goToCategorie(category:any) {
+      this.router.navigate(['categoryView',category.id_category])
   }
 
 

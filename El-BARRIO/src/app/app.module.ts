@@ -24,6 +24,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { SiginCustomerComponent } from './components/sigin-customer/sigin-customer.component';
 import { SearchComponent } from './components/search/search.component';
 import { AdminPortalComponent } from './components/admin-portal/admin-portal.component';
+import { CategorieViewComponent } from './components/categorie-view/categorie-view.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AdminPortalComponent } from './components/admin-portal/admin-portal.com
     ProfileComponent,
     ShoppingCartComponent,
     SearchComponent,
-    AdminPortalComponent
+    AdminPortalComponent,
+    CategorieViewComponent
   ],
   imports: [
     BrowserModule,

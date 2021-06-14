@@ -24,7 +24,7 @@ router.post('/getSession', async (req, res) => {
             //BD_ELBARRIO
             sql.close();
             let poolEB = await sql.connect(dbElbarrioConfig);
-            if (users.recordsets[0].user_type == 2) {
+            if (users.recordsets[0][0].user_type == 1) {
                 var resBd = await poolEB.request()
                     .query(`SELECT *
                 FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 

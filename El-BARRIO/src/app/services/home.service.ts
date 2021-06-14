@@ -13,6 +13,11 @@ export class HomeService {
     return this.http.post(url,{});
   }
 
+  getItemsByCategory(id_category:number) {
+    const url = `http://localhost:3000/categoryTop/getItemsByCategory`;
+    return this.http.post(url,{'id_category':id_category});
+  }
+
   getBestSellerItems() {
     const url = `http://localhost:3000/productTop/getTopProductosDest`;
     return this.http.post(url,{});
