@@ -13,13 +13,13 @@ router.post('/registerConsumidor', async(req,res) => {
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
             .query(`SELECT user_name FROM USERS 
-                    WHERE user_name = '${req.body.email}'`);
+                    WHERE username = '${req.body.email}'`);
 
         console.log(req.body);
         if (Object.keys(users.recordsets[0]).length == 0){
             
             let registerU =  await pool.request()
-            .query(`INSERT INTO USERS (user_name,password,user_type)
+            .query(`INSERT INTO USERS (username,pass,user_type)
             VALUES ('${req.body.email}','${req.body.password}',${1})`);
             
             //BD_ELBARRIO
@@ -61,7 +61,7 @@ router.post('/registerConsumidor', async(req,res) => {
             res.json({
                 code : -1,
                 msg : 'El nombre de usuario ya existe dentro del sistema.',
-                data : users.recordsets[0]
+                data : {}
             });
 
         }
@@ -90,7 +90,7 @@ router.post('/registerEmprendedor', async(req,res) => {
         if (Object.keys(users.recordsets[0]).length == 0){
             
             let registerU =  await pool.request()
-            .query(`INSERT INTO USERS (user_name,password,user_type)
+            .query(`INSERT INTO USERS (user_name,pass,user_type)
             VALUES ('${req.body.email}','${req.body.password}',${3})`);
             
             //BD_ELBARRIO
@@ -132,7 +132,7 @@ router.post('/registerEmprendedor', async(req,res) => {
             res.json({
                 code : -1,
                 msg : 'El nombre de usuario ya existe dentro del sistema.',
-                data : users.recordsets[0]
+                data : {}
             });
 
         }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemsService } from 'src/app/services/items.service';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  customerFlag:boolean = false;
+  customerFlag: boolean = false;
   options: boolean[] = [true, false, false, false];
-  userData : any = {};
-  readonlyInfo:boolean = true;
+  userData: any = {};
+  readonlyInfo: boolean = true;
   customer = {
     name: '',
     password1: '',
@@ -24,17 +26,17 @@ export class ProfileComponent implements OnInit {
   loading: boolean = false;
   msgError: string = '';
   errorLogin: boolean = false;
-  items:any[] = [1,2,3,4,5,6];
-  
-  constructor() { 
+  items: any[] = [];
+
+  constructor(private shopService: ShopService, private itemService: ItemsService) {
     if (localStorage.getItem('session')) {
-      this.userData = JSON.parse(localStorage.getItem('session'));
-      this.customerFlag = this.userData.id_customer == 2;
+      this.fillUser();
     }
   }
 
-  ngOnInit(): void {
-    console.log(this.userData);
+  fillUser() {
+    this.userData = JSON.parse(localStorage.getItem('session'));
+    this.customerFlag = this.userData.id_customer == 2;
     this.customer.name = this.userData.name;
     this.customer.password1 = '';
     this.customer.password2 = '';
@@ -44,6 +46,10 @@ export class ProfileComponent implements OnInit {
     this.customer.state = this.userData.state;
     this.customer.city = this.userData.city;
     this.customer.direction = this.userData.address_opt;
+  }
+
+  ngOnInit(): void {
+
   }
 
   changeContent(opt: number) {
@@ -57,6 +63,7 @@ export class ProfileComponent implements OnInit {
       case 1: // purchases history
         break;
       case 2: // shops items product
+        this.loadItemsByShop();
         break;
       case 3: // sales history
         break;
@@ -79,6 +86,28 @@ export class ProfileComponent implements OnInit {
 
     this.loading = false;
 
+  }
+
+  loadItemsByShop() {
+    let id_shop = JSON.parse(localStorage.getItem('session')).id_shop;
+    this.shopService.getShopItemsEntrepreneur(id_shop)
+      .subscribe((data: any) => {
+        this.items = data.data;
+        console.log(this.items);
+      })
+  }
+
+  changeStatus(item, newStatus) {
+    this.loading = true;
+    this.itemService.changeItemStatus(newStatus, item.id_item)
+      .subscribe((data: any) => {
+        if (data.code > 0) {
+          this.loadItemsByShop();
+        }
+      }, (error) => {
+        console.log(error);
+      })
+    this.loading = false;
   }
 
 }

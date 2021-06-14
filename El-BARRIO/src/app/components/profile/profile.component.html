@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-2">
             <div class="list-group">
-                <button [hidden]="!customerFlag" type="button" class="btn border-0 list-group-item text-start"
+                <button type="button" class="btn border-0 list-group-item text-start"
                     [ngClass]="{'bg-dark': options[0], 'text-white' : options[0]}" (click)="changeContent(0)">
                     Información personal
                 </button>
@@ -20,8 +20,9 @@
                 </button>
             </div>
         </div>
-        <!--Personal information-->
+       
         <div class="col-10">
+             <!--Personal information-->
             <div *ngIf="options[0]">
                 <button class="btn float-end mb-2" (click)="readonlyInfo = !readonlyInfo">
                     <i *ngIf="readonlyInfo" class="fas fa-pencil-alt fa-2x"></i>
@@ -72,7 +73,7 @@
                     <br>
                     <input type="submit"
                         class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        value="Registrarme" [disabled]="loading || readonlyInfo">
+                        value="Guardar" [disabled]="loading || readonlyInfo">
                 </form>
             </div>
             <!--Pucharses history-->
@@ -103,6 +104,13 @@
             </div>
             <!--Items shop product-->
             <div *ngIf="options[2]">
+                <h2 class="fs-2 d-inline-block">Lista de productos</h2>
+                <div class="float-end">
+                    <a class="btn" [routerLink]="['/addItem/0']">
+                        <i class="fas fa-plus-circle fa-2x"></i>
+                    </a>
+                </div>
+                <br>
                 <div class="row row-cols-1 g-4">
                     <div class="card border-0" *ngFor="let item of items">
                         <div class="card-body">
@@ -115,14 +123,12 @@
                                     <div class="w-100">
                                         <div class="btn-group d-block" role="group">
                                             <div class="d-flex justify-content-center">
-                                                <button type="button" (click)="viewShop(shop)"
-                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
-                                                <button type="button" (click)="viewShop(shop)"
-                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Modificar</button>
-                                                <button type="button" (click)="viewShop(shop)"
+                                                <a type="button" [routerLink]="['/addItem/'+item.id_item]"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</a>
+                                                <button [disabled]="!item.status || loading" [hidden]="!item.status" type="button" (click)="changeStatus(item,0)"
                                                     class="w-50 btn bg-el-barrio-blue rounded-pill">Deshabilitar</button>
-                                                <button type="button" (click)="viewShop(shop)"
-                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Habilitar</button>
+                                                <button [disabled]="item.status || loading" [hidden]="item.status" type="button" (click)="changeStatus(item,1)"
+                                                    class="w-50 btn bg-el-barrio-golden rounded-pill">Habilitar</button>
                                             </div>
                                         </div>
                                     </div>

@@ -92,10 +92,46 @@ router.post('/shopShowProducts', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT i.id_item, i.name, i.price
+            .query(`SELECT *
             FROM ITEM i INNER JOIN SHOP s ON i.id_shop = s.id_shop
             WHERE s.id_shop = ${req.body.id_shop} AND status = 1`);
         
+        res.json({
+            code : 1,
+             msg : '',
+            data : products.recordsets[0]
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo mostrar los productos.',
+            data : error
+        });
+    }
+})
+
+
+//Mostrar productos para el emprendedor de una Tienda 
+//Body = {"id_shop": //numero }
+
+router.post('/shopProducts', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let products =  await poolEB.request()
+            .query(`SELECT i.id_item, 
+                        i.id_category, 
+                        i.id_shop, 
+                        i.name, 
+                        i.status, 
+                        i.description, 
+                        i.price, 
+                        s.id_entrepreneur
+                    FROM ITEM i
+                    inner join SHOP s ON i.id_shop = s.id_shop
+                    WHERE s.id_shop = ${req.body.id_shop}`);
         res.json({
             code : 1,
              msg : '',

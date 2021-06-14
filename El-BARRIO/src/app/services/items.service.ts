@@ -12,4 +12,10 @@ export class ItemsService {
     const url = `http://localhost:3000/productTop/productSearchBar`;
     return this.http.post(url,{'name':q});
   }
+
+
+  changeItemStatus(status:number,id_item) {
+    const url =  `http://localhost:3000/productTop/ProductStateUpdate`;
+    return this.http.post(url,{'status':status, 'id_item':id_item});
+  }
 }

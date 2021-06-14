@@ -34,8 +34,10 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     User.logout();
+    this.loginSession = false;
     localStorage.removeItem('session');
-    this.router.navigate(['home']);
+    this.router.navigate(['/home']);
+    
   }
 
   goShoppingCart() {
@@ -49,7 +51,7 @@ export class HeaderComponent implements OnInit {
   search() {
     let q = (<HTMLInputElement>document.getElementById("input-search")).value;
     if (q != '') {
-      this.router.navigate(['search', q]);
+      this.router.navigate(['/search', q]);
     }
   }
 }
