@@ -1,31 +1,54 @@
-<div class="row mt-5">
-    <div class="col-4 ms-md-5">
-        <img [src]=" item.img | noimage" alt="" srcset="">
-    </div>
-    <div class="col-6">
-        <h3 class="fs-1 my-2">Zapatilla deportiva</h3>
-        <div class="col-8 my-1">
-            <span class="my-2" [class]="star" *ngFor="let star of rating"></span>
+<div class="mx-5 px-5 animated fadeIn">
+    <div class="row mt-5">
+        <div class="col-4 ms-md-5">
+            <img class="img-fluid" [src]=" item.img | noimage" alt="" srcset="">
         </div>
-        <div class="my-2">
-            <button (click)="quantitySub()" class="fas fa-minus btn"></button>
-            <input class="border-1 rounded-pill text-center" type="text" [value]="count">
-            <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
-            <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2">Añadir al carrito</button>
+        <div class="col-6">
+            <h3 class="fs-2 my-2">{{item.name}}</h3>
+            <div class="col-8 my-1">
+                <span class="my-2" [class]="star" *ngFor="let star of rating"></span>
+            </div>
+            <h5 class="fs-4 my-2">{{item.description}}</h5>
+            <div class="my-2">
+                <button (click)="quantitySub()" class="fas fa-minus btn"></button>
+                <input class="border-1 rounded-pill text-center" type="text" [value]="count">
+                <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
+                <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2">Añadir al carrito</button>
+            </div>
         </div>
     </div>
-</div>
-<hr class="mx-5" style="height: 2px;">
-<div class="row">
-    <h2 class="fs-3 ms-5">Productos Relacionados</h2>
-    <app-items [items]="items"></app-items>
-</div>
-<div class="row container">
-    <h2 class="fs-3 text-center">Opiones</h2>
+    <hr class="mx-5" style="height: 2px;">
+    <div class="row">
+        <h2 class="fs-3 ms-5">Productos Relacionados</h2>
+        <app-items [items]="items"></app-items>
+    </div>
+    <hr class="mx-md-5 px-md-5">
+    <div class="row container mx-md-5">
+        <h2 class="fs-3 text-center">Opiones</h2>
+        <div class="row row-cols-1 row-cols-md-4 g-4 mb-3 animated fadeIn">
+            <div class="col card border-0" *ngFor="let review of reviews">
+                <img class="card-img-top mx-auto img-fluid rounded-circle" [src]="review.image | noimage">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{review.name | uppercase}}</h4>
+                    <h5>{{review.annotation}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container mx-md-5 px-md-5 mb-5">
+            <form class="text-center form-control w-75" autocomplete="off" (ngSubmit)="registerReview(forma)"
+                #forma="ngForm">
+                <h3 class="fs-2 text-start mb-5">{{user.name | uppercase}}</h3>
+                <textarea class="form-control" type="text" placeholder="Opinión" name="annotation"
+                    [class.is-invalid]="annotation.invalid && annotation.touched" [ngModel]="user.annotation"
+                    #annotation="ngModel" required style="resize: none;">
+                </textarea>
+                <input type="submit"
+                    class="button btn bg-el-barrio-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                    value="Publicar" [disabled]="loading">
+            </form>
+        </div>
 
-</div>
-<div class="row container">
-    <form>
-
-    </form>
+    </div>
 </div>

@@ -30,6 +30,7 @@ router.post('/getTopCategories', async(req,res) => {
     }
 })
 
+// Get all items if the category
 router.post('/getItemsByCategory', async(req,res) => {
     try {
         let poolEB = await sql.connect(dbElbarrio);

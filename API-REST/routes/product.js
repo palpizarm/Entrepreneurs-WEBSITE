@@ -231,5 +231,48 @@ router.post('/ProductStateUpdate', async(req,res) => {
 })
 
 
+// Get item info
+//body{id_item }
+router.post('/getItemInformation', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let itemInfo =  await poolEB.request()
+            .query(`SELECT *	
+                FROM ITEM i
+                WHERE i.id_item = ${req.body.id_item}`);
+        let relatedItems = await poolEB.request()
+        .query(`SELECT TOP(3) *	
+            FROM ITEM i
+            WHERE i.id_item != ${req.body.id_item}`);
+
+
+        let reviews = await poolEB.request().query(`SELECT r.annotation, ra.score, u.name 
+            FROM REVIEW r
+                INNER JOIN ITEM i ON r.id_item = i.id_item
+                INNER JOIN RATING ra ON r.id_rating = ra.id_rating
+                INNER JOIN CUSTOMERS c ON c.id_customer = r.id_customer
+                INNER JOIN USERS u ON c.id_customer = u.id_user
+            WHERE i.id_item = ${req.body.id_item}`)
+        res.json({
+            code : 1,
+             msg : '',
+            data : {
+                'item': itemInfo.recordsets[0],
+                'relatedItems' : relatedItems.recordsets[0],
+                'reviews' : reviews.recordsets[0]
+            }
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Error al recuperar la información del producto',
+            data : error
+        });
+    }
+})
+
 
 module.exports = router

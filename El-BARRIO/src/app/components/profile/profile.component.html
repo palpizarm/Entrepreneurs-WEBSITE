@@ -77,8 +77,8 @@
                 </form>
             </div>
             <!--Pucharses history-->
-            <div *ngIf="options[1]">
-                <div class="row row-cols-1 g-4">
+            <div *ngIf="options[1]" style="min-height: 100vh;">
+                <div class="row row-cols-1 g-4 ">
                     <div class="card border-0" *ngFor="let item of items">
                         <div class="card-body">
                             <div class="row">
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <!--Items shop product-->
-            <div *ngIf="options[2]">
+            <div *ngIf="options[2]" style="min-height: 100vh;">
                 <h2 class="fs-2 d-inline-block">Lista de productos</h2>
                 <div class="float-end">
                     <a class="btn" [routerLink]="['/addItem/0']">
@@ -140,7 +140,7 @@
                 </div>
             </div>
             <!--Sales History-->
-            <div *ngIf="options[3]">
+            <div *ngIf="options[3]" style="min-height: 100vh;">
                 <div class="row row-cols-1 g-4">
                     <div class="card border-0" *ngFor="let item of items">
                         <div class="card-body">

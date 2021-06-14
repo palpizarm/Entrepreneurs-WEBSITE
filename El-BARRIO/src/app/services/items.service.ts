@@ -18,4 +18,10 @@ export class ItemsService {
     const url =  `http://localhost:3000/productTop/ProductStateUpdate`;
     return this.http.post(url,{'status':status, 'id_item':id_item});
   }
+
+
+  getItemInfo(id:number) {
+    const url =  `http://localhost:3000/productTop/getItemInformation`;
+    return this.http.post(url,{'id_item':id});
+  }
 }
