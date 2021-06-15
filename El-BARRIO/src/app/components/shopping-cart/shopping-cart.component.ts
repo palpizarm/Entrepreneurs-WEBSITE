@@ -33,8 +33,8 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  quantityAdd(){
-
+  quantityAdd(index:number){
+    this.items[index].quantity = this.items[index].quantity + 1;
   }
 
 }
