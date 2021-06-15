@@ -27,4 +27,9 @@ export class HomeService {
     const url = `http://localhost:3000/productTop/getTopProductosNuevos`;
     return this.http.post(url,{});
   }
+
+  getAlllCategories() {
+    const url = `http://localhost:3000/categoryTop/getCategories`;
+    return this.http.post(url,{});
+  }
 }

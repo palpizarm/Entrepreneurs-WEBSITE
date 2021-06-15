@@ -57,6 +57,32 @@ router.post('/getItemsByCategory', async(req,res) => {
 })
 
 
+//categorias para el dropdown
+
+router.post('/getCategories', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let categories =  await poolEB.request()
+            .query(`SELECT * FROM CATEGORY`);
+        
+        res.json({
+            code : 1,
+             msg : '',
+            data : categories.recordsets[0]
+        });
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente',
+            data : error
+        });
+    }
+})
+
+
 
 
 

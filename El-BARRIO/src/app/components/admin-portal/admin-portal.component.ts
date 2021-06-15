@@ -54,7 +54,7 @@ export class AdminPortalComponent implements OnInit {
     this.userLogin = false;
     localStorage.removeItem("user-session");
     this.session = 'Iniciar Sesión';
-    window.location.reload();
+    this.router.navigate(['/home']);
 
   }
 

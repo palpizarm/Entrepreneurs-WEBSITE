@@ -1,1 +1,40 @@
-<p>add-item works!</p>
+<div class="mx-5 px-5 animated fadeIn" style="height: 100vh;">
+    <div class="row mt-5">
+        <div class="col-4 ms-md-5">
+            <img class="img-fluid" [src]=" item.img | noimage" *ngIf="!imgURL">
+            <img class="img-fluid" [src]="imgURL" *ngIf="imgURL">
+            <div class="d-flex justify-content-center">
+                <div class="form-group">
+                    <input  class="btn" 
+                            type="file" 
+                            id="file" 
+                            accept='image/*' 
+                            (change)="loadImage($event.target.files)">
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <form class="text-center border-0" autocomplete="off" #forma="ngForm" (ngSubmit)="registerItem(forma)">
+                <input class="form-control my-1" type="text" placeholder="Nombre" name="name"
+                    [class.is-invalid]="name.invalid && name.touched" [ngModel]="item.name" #name="ngModel" required>
+                <textarea class="form-control my-1" type="text" placeholder="description" name="description"
+                    [class.is-invalid]="description.invalid && description.touched" [ngModel]="item.description"
+                    #description="ngModel" required style="resize: none;">
+                 </textarea>
+                <input class="form-control w-50 my-1" type="text" placeholder="Precio" name="price"
+                    [class.is-invalid]="price.invalid && price.touched" [ngModel]="item.price" #price="ngModel"
+                    required>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Categoria</label>
+                        <select required class="form-select" id="inputGroupSelect01">
+                          <option selected>Seleccionar</option>
+                          <option value="cate.id_category" *ngFor="let cate of categories">{{cate.name}}</option>
+                        </select>
+                      </div>
+                <input type="submit"
+                    class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
+                    value="Guardar" [disabled]="loading">
+            </form>
+        </div>
+    </div>
+</div>

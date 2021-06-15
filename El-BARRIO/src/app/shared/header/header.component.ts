@@ -18,7 +18,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     document.addEventListener('mousemove', ()=> {
       if (localStorage.getItem('session')) {
-        this.loginSession = true;
+        let user = JSON.parse(localStorage.getItem('session'));
+        if (user.id_customer || user.id_entrepreneur) {
+          this.loginSession = true;
+        }
       }
     })
     
@@ -41,7 +44,7 @@ export class HeaderComponent implements OnInit {
   }
 
   goShoppingCart() {
-    if (User.isSession()) {
+    if (localStorage.getItem('session')) {
       this.router.navigate(["/shopping-cart"]);
     } else {
       this.router.navigate(['/login']);
