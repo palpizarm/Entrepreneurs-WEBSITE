@@ -10,7 +10,9 @@ export class ItemsComponent implements OnInit {
 
   @Input() items : any[];
 
-  constructor(private router : Router) { }
+  constructor(private router : Router) { 
+    
+  }
 
   ngOnInit(): void {
   }

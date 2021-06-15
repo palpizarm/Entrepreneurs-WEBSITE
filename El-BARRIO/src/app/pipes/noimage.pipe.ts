@@ -6,14 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NoimagePipe implements PipeTransform {
 
   // spotify returns an url array list
-  transform(images: any): string {
-    if (!images) {
+  transform(image: string): string {
+    if (image == '') {
       return 'assets/img/no-image-found.png';
-    }
-    if (images) {
-      return images.url;
     } else {
-      return 'assets/img/no-image-found.png';
+      return image;
     }
   }
 }

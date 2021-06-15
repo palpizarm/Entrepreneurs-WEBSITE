@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const multer = require('multer')
+const cors = require('cors');
 
 const uploadImage = require('./helpers/helpers')
 
@@ -18,6 +19,7 @@ app.disable('x-powered-by')
 app.use(multerMid.single('file'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(cors());
 
 app.post('/uploads', async (req, res, next) => {
   try {
@@ -27,10 +29,17 @@ app.post('/uploads', async (req, res, next) => {
     res
       .status(200)
       .json({
+        code : 1,
         message: "Upload was successful",
         data: imageUrl
       })
   } catch (error) {
+    res
+    .json({
+      code : -1,
+      message: "Upload Falied",
+      data: ""
+    })
     next(error)
   }
 })

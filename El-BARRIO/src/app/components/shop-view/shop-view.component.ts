@@ -31,6 +31,7 @@ export class ShopViewComponent implements OnInit {
       .subscribe((data:any) => {
         if (data.code > 0) {
           this.items = data.data;
+          console.log(this.items)
         }
       }, (error) => {
         console.log(error);

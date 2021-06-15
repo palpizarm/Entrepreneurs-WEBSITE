@@ -1,6 +1,6 @@
 <div class="px-5 mt-5">
     <div class="row mb-5">
-        <div class="bg-el-barrio-dark-blue">
+        <div class="bg-el-barrio-dark-blue rounded">
             <h2>Tiendas</h2>
         </div>
     </div>
@@ -8,9 +8,9 @@
         <div class="row row-cols-1 row-cols-md-4 g-4 mb-3 animated fadeIn">
             <div class="col" *ngFor="let shop of shops">
                 <div class="card puntero border-0" (click)="viewShop(shop)">
-                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image| noimage">
+                    <img class="card-img-top mx-auto rounded-circle" [src]="shop.image | noimage">
                     <div class="card-body text-center">
-                        <h4 class="card-title">{{shop.name}}</h4>
+                        <h4 class="card-title fw-bolder">{{shop.name}}</h4>
                     </div>
                 </div>
             </div>

@@ -29,8 +29,8 @@ router.post('/registerConsumidor', async(req,res) => {
             
             //USERS
             let registerBdUsers = await poolEB.request()
-            .query(`INSERT INTO USERS (name,email,phone,cedula)
-            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}')`);
+            .query(`INSERT INTO USERS (name,email,phone,cedula,image)
+            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}', '${req.body.image}')`);
 
             //ADDRESS
             let registerBdAddress = await poolEB.request()

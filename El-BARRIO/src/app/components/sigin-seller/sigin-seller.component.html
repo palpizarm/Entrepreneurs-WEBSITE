@@ -7,7 +7,7 @@
     <div class="row">
         <div class="d-flex justify-content-center">
             <div class="mt-5 w-50">
-                <form class="text-center form-control border-0 animeted fadeIn">
+                <div class="text-center animeted fadeIn">
                     <div class="row">
                         <div class="col-1 m-0 p-0">
                             <span class="align-self-start fas fa-circle fa-3x" style="color: #005E7A;"></span>
@@ -23,10 +23,20 @@
                         </div>
                     </div>
                     <br><br><br>
-                </form>
+                </div>
                 <form class="text-center form-control border-0 animeted fadeIn" autocomplete="off"
                     (ngSubmit)="register(forma)" #forma="ngForm">
                     <h3 class="fs-2 text-start mb-5">Información personal</h3>
+                    <div class="col-4 my-1 w-100">
+                        <h4>Seleecione una imagen</h4>
+                        <div class="card w-100">
+                        <img class="img-fluid mx-auto rounded-circle" [src]="imgURL" *ngIf="imgURL" style="max-width: 200px; max-height: 200px;">
+                            <div class="card-body">
+                                <input class="btn" type="file" id="file" accept='image/*'
+                                    (change)="loadImage($event.target.files)">
+                            </div>
+                        </div>
+                    </div>
                     <input class="form-control" type="text" placeholder="Nombre completo" name="name"
                         (ngModelChange)="errorLogin=false" [class.is-invalid]="name.invalid && name.touched"
                         [ngModel]="customer.name" #name="ngModel" required>
@@ -65,6 +75,16 @@
                     <small class="text-danger" *ngIf="(password1.value != password2.value) && password2.touched">La
                         contraseña no coincide</small>
                     <h3 class="fs-2 text-start mb-5">Información tienda</h3>
+                    <div class="col-4 my-1 w-100">
+                        <h4>Seleecione una imagen</h4>
+                        <div class="card w-100">
+                        <img class="img-fluid mx-auto rounded-circle" [src]="imgURLE" *ngIf="imgURLE" style="max-width: 200px; max-height: 200px;">
+                            <div class="card-body">
+                                <input class="btn" type="file" id="file" accept='image/*'
+                                    (change)="loadImageE($event.target.files)">
+                            </div>
+                        </div>
+                    </div>
                     <input class="form-control" type="text" required placeholder="Nombre de tienda" name="shopName"
                         (ngModelChange)="errorLogin=false" [class.is-invalid]="shopName.invalid && shopName.touched"
                         [ngModel]="customer.shopName" #shopName="ngModel">

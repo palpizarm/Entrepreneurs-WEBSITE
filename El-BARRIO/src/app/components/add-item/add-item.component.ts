@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/services/home.service';
-import { ImageService } from 'src/app/services/imag.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-add-item',

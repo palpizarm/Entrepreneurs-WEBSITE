@@ -17,6 +17,7 @@ export class ShopsComponent implements OnInit {
       .subscribe((data:any) => {
         if (data.code > 0) {
           this.shops = data.data;
+          console.log(this.shops);
         }
       })
   }
