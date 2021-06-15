@@ -1,1 +1,30 @@
-<p>shopping-cart works!</p>
+<div class="mx-5 px-5 animated fadeIn" style="height: 100vh;">
+    <div class="row row-cols-1 g-4">
+        <div class="card border-0" *ngFor="let item of items">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+                        <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
+                        <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
+                    </div>
+                    <div class="col-sm-12 col-md-9">
+                        <button (click)="quantitySub()" class="fas fa-minus btn"></button>
+                        <input class="border-1 rounded-pill text-center" type="text" [value]="count">
+                        <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
+                        <div class="d-flex align-items-center">
+                            <div class="w-100">
+                                <div class="btn-group d-block" role="group">
+                                    <div class="d-flex justify-content-center">
+                                        <button type="button" (click)="viewShop(shop)"
+                                            class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@
                 <span class="my-2" [class]="star" *ngFor="let star of rating"></span>
             </div>
             <h5 class="fs-4 my-2">{{item.description}}</h5>
+            <h5 class="fs-4 my-2">{{item.price | currency: 'CRC':'symbol-narrow'}}</h5>
             <div class="my-2">
                 <button (click)="quantitySub()" class="fas fa-minus btn"></button>
                 <input class="border-1 rounded-pill text-center" type="text" [value]="count">
