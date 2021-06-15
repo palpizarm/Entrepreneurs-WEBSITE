@@ -9,6 +9,18 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 export class ShoppingCartComponent implements OnInit {
 
   items: any = [];
+  date: any = new Date();
+  orderForm:any = {
+    phone: '',
+    state: '',
+    city: '',
+    address : '',
+    cardNumebr : '',
+    dateExpired : '',
+    cvv : ''
+  }
+  loading:boolean = true;
+
   constructor(private shoppingCartService: ShoppingCartService) {
     var userData = JSON.parse(localStorage.getItem('session'));
     if (userData.id_customer) {
@@ -34,7 +46,37 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   quantityAdd(index:number){
+    console.log(index, "call it");
     this.items[index].quantity = this.items[index].quantity + 1;
+  }
+
+  quantitySub(index:number){
+    if (this.items[index].quantity > 1) {
+      this.items[index].quantity = this.items[index].quantity - 1;
+    }
+  }
+
+  processOrder(){
+    document.getElementById('btn-formOrder').click();
+  }
+
+  processToBuy(order:any) {
+    if (order.invalid) {
+      Object.values(order.controls).forEach((control: any) => {
+        control.markAsTouched();
+
+      })
+      return;
+    }
+  }
+
+  CloseForm(order){
+    if (order.invalid) {
+      Object.values(order.controls).forEach((control: any) => {
+        control.touched = false;
+      })
+      return;
+    }
   }
 
 }

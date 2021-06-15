@@ -10,6 +10,7 @@ const sql = require('mssql');
 router.post('/registerConsumidor', async(req,res) => {
     try {
         //BD_USERS
+        sql.close();
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
             .query(`SELECT user_name FROM USERS 
@@ -81,6 +82,7 @@ router.post('/registerConsumidor', async(req,res) => {
 router.post('/registerEmprendedor', async(req,res) => {
     try {
         //BD_USERS
+        sql.close();
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
             .query(`SELECT user_name FROM USERS 

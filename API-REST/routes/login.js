@@ -9,6 +9,7 @@ const sql = require('mssql');
 // req.body {username,password}
 router.post('/getSession', async (req, res) => {
     try {
+        sql.close();
         let pool = await sql.connect(dbUsersConfig);
         let users = await pool.request()
             .query(`SELECT * FROM USERS U 
