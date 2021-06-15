@@ -1,4 +1,12 @@
-<div class="mx-5 px-5 animated fadeIn" style="height: 100vh;">
+<div class="mx-5 px-5 animated fadeIn" style="min-height: 100vh;">
+    <h2 class="fs-1 text-center mt-md-5">Carrito de compras</h2>
+    <h5 class="text-end">Cantidad de productos: {{items.length}}</h5>
+    <div class="container mt-md-5" *ngIf="items.length == 0">
+        <h6 class="fs-6 text-center">No tiene ningun producto en su carrito</h6>
+        <a class="btn bg-el-barrio-golden d-block mx-auto" [routerLink]="['/categories']">
+            Ver lista productos
+        </a>
+    </div>
     <div class="row row-cols-1 g-4">
         <div class="card border-0" *ngFor="let item of items; let i=index">
             <div class="card-body">
@@ -10,7 +18,8 @@
                     <div class="col-sm-12 col-md-9 d-flex align-items-center">
                         <div class="row">
                             <div class="col-6">
-                                <h4 class="fs-3 mx-md-5 mb-md-5">{{item.price | currency: 'CRC':'symbol-narrow'}}</h4>
+                                <h3 class="fs-3 mx-md-5 mb-md-5">{{item.description}}</h3>
+                                <h4 class="fs-3 mx-md-5 mb-md-5">{{(item.price*item.quantity) | currency: 'CRC':'symbol-narrow'}}</h4>
                                <div class="btn-group ">
                                 <button (click)="quantitySub(i)" class="fas fa-minus btn"></button>
                                 <input class="border-1 rounded-pill text-center" type="text" [value]="item.quantity">
@@ -21,7 +30,7 @@
                                 <div class="w-100 mx-md-5">
                                     <div class="btn-group d-block" role="group">
                                         <div class="d-flex justify-content-center">
-                                            <button class="btn">
+                                            <button class="btn mx-md-5" (click)="removeItem(item)">
                                                 <i class="far fa-times-circle fa-3x"></i>
                                             </button>
                                             <button type="button" (click)="processOrder()"
@@ -52,7 +61,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Procesar compra</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

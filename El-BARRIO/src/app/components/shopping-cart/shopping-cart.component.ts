@@ -19,9 +19,16 @@ export class ShoppingCartComponent implements OnInit {
     dateExpired : '',
     cvv : ''
   }
-  loading:boolean = true;
+  loading:boolean = false;
 
   constructor(private shoppingCartService: ShoppingCartService) {
+    this.loadData();
+  }
+
+  ngOnInit(): void {
+  }
+
+  loadData(){
     var userData = JSON.parse(localStorage.getItem('session'));
     if (userData.id_customer) {
       this.shoppingCartService.getShoppingCart(userData.id_customer)
@@ -40,9 +47,6 @@ export class ShoppingCartComponent implements OnInit {
           }
         });;
     }
-  }
-
-  ngOnInit(): void {
   }
 
   quantityAdd(index:number){
@@ -77,6 +81,18 @@ export class ShoppingCartComponent implements OnInit {
       })
       return;
     }
+  }
+
+  removeItem(item:any) {
+    
+    this.shoppingCartService.removeItem(item.id_shopCart)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.loadData();
+        }
+      }, (error) => {
+        console.log(error);
+      })
   }
 
 }

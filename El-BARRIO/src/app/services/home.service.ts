@@ -28,8 +28,13 @@ export class HomeService {
     return this.http.post(url,{});
   }
 
-  getAlllCategories() {
+  getAllCategories() {
     const url = `http://localhost:3000/categoryTop/getCategories`;
+    return this.http.post(url,{});
+  }
+
+  getAllCategoriesItems() {
+    const url = `http://localhost:3000/categoryTop/showCategoriesItem`
     return this.http.post(url,{});
   }
 }

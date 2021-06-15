@@ -3,8 +3,8 @@
         <div class="row py-2">
             <div class="col-sm-4 col-md-3">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-secondary"
-                        (click)="logout()" [disabled]='!loginSession'>
+                    <button type="button" class="btn btn-outline-secondary" (click)="logout()"
+                        [disabled]='!loginSession'>
                         <i class="fas fa-sign-out-alt text-white"></i>
                     </button>
                     <button type="button" class="btn btn-outline-secondary text-white" (click)="login()">
@@ -16,8 +16,8 @@
             <div class="d-flex justify-content-end col-sm-8 col-md-9">
                 <div class="col-sm-5 col-md-5 mx-5">
                     <div class="input-group mb-3">
-                        <input id="input-search" type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
-                            aria-describedby="barra de busqueda">
+                        <input id="input-search" type="text" class="form-control" placeholder="Buscar"
+                            aria-label="Buscar" aria-describedby="barra de busqueda">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" (click)="search()">
                                 <i class="bi bi-search text-white"></i>
@@ -28,7 +28,10 @@
                 <div class="col-sm-3 col-md-1">
                     <button class="btn btn-outline-secondary" (click)="goShoppingCart()">
                         <div class="d-md-inline-block cart">
-                            <i class="bi bi-cart text-white"></i>
+                            <span class="fa-layers fa-fw">
+                                <i class="fas fa-shopping-cart text-white" data-count="2"></i>
+                                <span class="fs-6 fa-layers-counter ms-3 text-white">{{cartItemCount}}</span>
+                            </span>
                         </div>
                     </button>
                 </div>
@@ -37,7 +40,7 @@
         <div class="row bg-white">
             <div class="col-sm-0 col-md-1">
                 <a routerLink="home">
-                <img class="m-2" src="../../../assets/img/icon.png" style="width: 80px; height: 80px;">
+                    <img class="m-2" src="../../../assets/img/icon.png" style="width: 80px; height: 80px;">
                 </a>
             </div>
             <div class="col-sm-12 col-md-11">

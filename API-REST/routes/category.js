@@ -90,7 +90,7 @@ router.post('/showCategoriesItem', async(req,res) => {
         
         let categories =  await poolEB.request()
             .query(`SELECT c.id_category, c.name AS nameCategory, c.image AS imageCategory, i.id_item,
-            i.id_shop, i.name  AS nameItem, i.status, i.description, i.price, i.image AS imageItem
+            i.id_shop, i.name , i.status, i.description, i.price, i.image AS imageItem
             FROM
             CATEGORY c INNER JOIN ITEM i on c.id_category=i.id_category
             WHERE i.status = 1

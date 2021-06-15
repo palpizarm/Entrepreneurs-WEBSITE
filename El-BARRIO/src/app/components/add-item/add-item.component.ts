@@ -23,7 +23,7 @@ export class AddItemComponent implements OnInit {
   categories:any= {};
 
   constructor(private imageService : ImageService, private categoryService : HomeService) { 
-    this.categoryService.getAlllCategories()
+    this.categoryService.getAllCategories()
       .subscribe((data:any) => {
         if(data.code > 0) {
           this.categories = data.data;

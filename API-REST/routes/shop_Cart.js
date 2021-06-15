@@ -41,7 +41,7 @@ router.post('/showShopCart', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let carrito =  await poolEB.request()
-            .query(`SELECT s.id_item, s.id_customer, s.quantity, i.name, i.price
+            .query(`SELECT s.id_shopCart, s.id_item, s.id_customer, s.quantity, i.name, i.price
             FROM SHOP_CART s inner join ITEM i on s.id_item=i.id_item
             WHERE s.id_customer = ${req.body.id_customer}`);
         
@@ -76,6 +76,34 @@ router.post('/deleteProduct', async(req,res) => {
             code : 1,
             msg : 'Su producto fue eliminado exitosamente.',
             data : {}
+        });
+        
+        
+    }
+    catch (error) {
+        res.json({
+            code : -8,
+            msg : 'Intentelo nuevamente, no se pudo eliminar el producto.',
+            data : error
+        });
+    }
+})
+
+
+//Obtener la cantidad de productos del carrito
+
+router.post('/getCartItemCount', async(req,res) => {
+    try {
+        let poolEB = await sql.connect(dbElbarrio);
+        
+        let count =  await poolEB.request()
+            .query(`SELECT COUNT(*) AS count FROM SHOP_CART
+            WHERE id_customer = ${req.body.id_customer}`);
+        
+        res.json({
+            code : 1,
+            msg : '',
+            data : count.recordsets[0]
         });
         
         

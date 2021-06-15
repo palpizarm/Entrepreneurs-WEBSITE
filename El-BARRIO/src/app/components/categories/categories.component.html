@@ -1,14 +1,14 @@
 <div class="mx-5 px-5 mt-5">
     <div class="d-flex justify-content-start">
         <div class="row w-100">
-            <div class="row" *ngFor="let catagorie of categories; let index">
+            <div class="row" *ngFor="let category of categoriesData; let i = index">
                 <div class="row mb-3">
-                    <div class="w-100" [class]="banner_color[index%3]">
-                        <h2>Categoria {{index}}</h2>
+                    <div class="w-100 rounded" [class]="banner_color[i%3]">
+                        <h2>{{category.name}}</h2>
                         <br><br>
                     </div>
                 </div>
-                <app-items [items]="categories"></app-items>
+                <app-items [items]="category.items"></app-items>
             </div>
         </div>
     </div>

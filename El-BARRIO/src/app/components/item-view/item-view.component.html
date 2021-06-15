@@ -1,4 +1,4 @@
-<div class="mx-5 px-5 animated fadeIn">
+<div id="topPage" class="mx-5 px-5 animated fadeIn">
     <div class="row mt-5">
         <div class="col-4 ms-md-5">
             <img class="img-fluid" [src]=" item.img | noimage" alt="" srcset="">
@@ -9,19 +9,20 @@
                 <span class="my-2" [class]="star" *ngFor="let star of rating"></span>
             </div>
             <h5 class="fs-4 my-2">{{item.description}}</h5>
-            <h5 class="fs-4 my-2">{{item.price | currency: 'CRC':'symbol-narrow'}}</h5>
+            <h5 class="fs-4 my-2">{{item.price * count | currency: 'CRC':'symbol-narrow'}}</h5>
             <div class="my-2">
                 <button (click)="quantitySub()" class="fas fa-minus btn"></button>
                 <input class="border-1 rounded-pill text-center" type="text" [value]="count">
                 <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
-                <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2">Añadir al carrito</button>
+                <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2" (click)="AddItem()">Añadir
+                    al carrito</button>
             </div>
         </div>
     </div>
     <hr class="mx-5" style="height: 2px;">
     <div class="row">
         <h2 class="fs-3 ms-5">Productos Relacionados</h2>
-        <app-items [items]="items"></app-items>
+        <app-items href="#topPage" [items]="items"></app-items>
     </div>
     <hr class="mx-md-5 px-md-5">
     <div class="row container mx-md-5">
@@ -51,5 +52,30 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button id="btn-successAdd" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Confimarción</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h5>El producto ha sifo agregado a su carrito de compras</h5>
+                <a data-bs-dismiss="modal" class="btn bg-el-barrio-golden" [routerLink]="['/shopping-cart']">
+                    Procesar compra
+                </a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>

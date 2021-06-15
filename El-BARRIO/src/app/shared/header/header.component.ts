@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { User } from 'src/app/class/user';
 export class HeaderComponent implements OnInit {
   loginSession:boolean = User.sessionIn;
   session:string = User.displayName;
-
-  constructor(public router : Router) { 
+  cartItemCount:number = 0;
+  constructor(public router : Router, private cartService : ShoppingCartService) { 
   }
 
   ngOnInit(): void {
@@ -21,6 +22,17 @@ export class HeaderComponent implements OnInit {
         let user = JSON.parse(localStorage.getItem('session'));
         if (user.id_customer || user.id_entrepreneur) {
           this.loginSession = true;
+          this.cartService.getItemCartQuantity(user.id_customer)
+            .subscribe((data:any) => {
+              if (data.code > 0) {
+                this.cartItemCount = data.data[0].count;
+              }
+              else {
+                this.cartItemCount = 0;
+              }
+            }, (error) => {
+              console.log(error);
+            })
         }
       }
     })
