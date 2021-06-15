@@ -1,7 +1,7 @@
 const dbElbarrio = {
     user: 'elbarrio',
     password: 'Admin123',
-    server: 'grupotec.database.windows.net', 
+    server: 'nanatec.database.windows.net', 
     database: 'BD_ELBARRIO',
     ssl:true
 }
@@ -9,7 +9,7 @@ const dbElbarrio = {
 const dbUsers = {
     user: 'elbarrio',
     password: 'Admin123',
-    server: 'grupotec.database.windows.net', 
+    server: 'nanatec.database.windows.net', 
     database: 'BD_USUARIOS',
     ssl:true
 }
