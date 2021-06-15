@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.code > 0) {
             this.categories = data.data;
+            console.log(this.categories)
         }
       }, (error) => {
         console.log(error);

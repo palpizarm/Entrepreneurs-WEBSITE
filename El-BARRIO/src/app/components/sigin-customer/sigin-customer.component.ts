@@ -27,7 +27,7 @@ export class SiginCustomerComponent implements OnInit {
   errorLogin: boolean = false;
   fileToUpload: File = null;
   public imagePath;
-  imgURL: any;
+  imgURL: any = '';
   public message: string;
 
 
@@ -91,7 +91,6 @@ export class SiginCustomerComponent implements OnInit {
   loadImage(files) {
     this.fileToUpload = files.item(0);
     this.preview(files);
-    console.log(this.fileToUpload);
   }
  
   preview(files) {

@@ -15,9 +15,9 @@ export class ImageService {
     const formData: FormData = new FormData();
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
-      'Access-Control-Allow-Origin': '*'
     });
     formData.append('file', fileToUpload, fileToUpload.name);
+    console.log(formData);
     return this.http.post(url, formData, {headers:headers});
   }
 

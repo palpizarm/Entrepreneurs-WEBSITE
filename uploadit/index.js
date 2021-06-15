@@ -10,8 +10,8 @@ const app = express()
 const multerMid = multer({
   storage: multer.memoryStorage(),
   limits: {
-    // no larger than 5mb.
-    fileSize: 5 * 2070 * 2070,
+    // no larger than.
+    fileSize: 5 * 6080 * 6080,
   },
 });
 
@@ -24,8 +24,9 @@ app.use(cors());
 app.post('/uploads', async (req, res, next) => {
   try {
     const myFile = req.file
+    console.log(myFile);
     const imageUrl = await uploadImage(myFile)
-
+    
     res
       .status(200)
       .json({
