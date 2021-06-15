@@ -48,7 +48,7 @@ app.use('/updateProductAdmin', productRoute);
 app.use('/questionToAdmin', adminRoute);
 app.use('/reviewProduct', reviewRoute);
 app.use('/shopCart', shopCartRoute);
-
+app.use('/categoryMenu', categoryRoute);
 
 
 
