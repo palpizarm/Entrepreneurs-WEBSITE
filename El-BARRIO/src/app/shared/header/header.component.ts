@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     document.addEventListener('mousemove', ()=> {
       if (localStorage.getItem('session')) {
         let user = JSON.parse(localStorage.getItem('session'));
-        if (user.id_user != 2) {
+        if (!user.id_admin) {
           this.loginSession = true;
           this.cartService.getItemCartQuantity(user.id_customer)
             .subscribe((data:any) => {
