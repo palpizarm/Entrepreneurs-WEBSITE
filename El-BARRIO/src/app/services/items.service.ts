@@ -38,22 +38,21 @@ export class ItemsService {
   }
 
 
-  registerItem(id_category:number,
-              id_shop:number,
-              name:string,
-              description:string,
-              price:number,
-              image:string)
+  registerOrder(id_customer:number,
+              id_item:number,
+              quantity:number,
+              unit_price:number,
+              total:number,
+              id_shopCart:number)
   {
-    const url = `http://localhost:3000/productShow/insertNewProduct`;
+    const url = `http://localhost:3000/order/insertOrder`;
     const body = {
-      'id_category':id_category,
-      'id_shop':id_shop,
-      'name':name,
-      'status':1,
-      'description':description,
-      'price':price,
-      'image':image
+      'id_customer':id_customer,
+      'id_item':id_item,
+      'quantity':quantity,
+      'unit_price':unit_price,
+      'total':total,
+      'id_shopCart':id_shopCart
     }
     return this.http.post(url,body);
   }
@@ -72,6 +71,26 @@ export class ItemsService {
   showProductsToAprove() {
     const url = `http://localhost:3000/productToAprove/getProductsToAprove`;
     return this.http.post(url,{});
+  }
+
+  registerItem(id_category:number,
+              id_shop:number,
+              name:string,
+              description:string,
+              price:number,
+              image:string)
+  {
+    const url = `http://localhost:3000/productShow/insertNewProduct`;
+    const body = {
+      'id_category':id_category,
+      'id_shop':id_shop,
+      'name':name,
+      'status':1,
+      'description':description,
+      'price':price,
+      'image':image
+    }
+    return this.http.post(url,body);
   }
 
 }
