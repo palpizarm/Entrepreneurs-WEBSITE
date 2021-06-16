@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ImageService } from 'src/app/services/image.service';
 import { RegisterService } from 'src/app/services/register.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-sigin-customer',
   templateUrl: './sigin-customer.component.html',
@@ -20,7 +22,7 @@ export class SiginCustomerComponent implements OnInit {
     state: 'San Jose',
     city: 'Perez Zeledón',
     direction: '200 m n de la pulperia El pueblo',
-    image:''
+    image: ''
   }
   loading: boolean = false;
   msgError: string = '';
@@ -31,7 +33,7 @@ export class SiginCustomerComponent implements OnInit {
   public message: string;
 
 
-  constructor(private registerService: RegisterService, private router : Router, private imageService : ImageService) { }
+  constructor(public registerService: RegisterService, private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
   }
@@ -47,15 +49,28 @@ export class SiginCustomerComponent implements OnInit {
     }
     this.loading = true;
     if (this.imgURL != '') {
-      this.imageService.postImage(this.fileToUpload)
-      .subscribe((data:any) => {
-        this.customer.image = data.data;
-        this.registerService.registerCustomer(registerForm.value)
+      var form = new FormData();
+      form.append("file", this.fileToUpload, this.fileToUpload.name);
+
+      var settings = {
+        "url": "http://localhost:9001/uploads",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "data": form
+      };
+
+      $.ajax(settings).then((result) => {
+        console.log(result);
+        this.loading = false;
+        this.registerService.registerCustomer(registerForm.value,result.data)
         .subscribe((data: any) => {
           if (data.code > 0) {
             console.log(data);
             let user = data.data[0];
-            localStorage.setItem('user-session', JSON.stringify(user));
+            localStorage.setItem('session', JSON.stringify(user));
             this.router.navigate(['/home']);
           } else {
             this.loading = false;
@@ -63,52 +78,30 @@ export class SiginCustomerComponent implements OnInit {
             this.errorLogin = true;
           }
         }, (errorService) => {
-          console.log(errorService)
-        }); 
-      })
-    } else {
-      this.registerService.registerCustomer(registerForm.value)
-      .subscribe((data: any) => {
-        if (data.code > 0) {
-          console.log(data);
-          let user = data.data[0];
-          localStorage.setItem('user-session', JSON.stringify(user));
-          this.router.navigate(['/home']);
-        } else {
-          this.loading = false;
-          this.msgError = data.msg;
-          this.errorLogin = true;
-        }
-      }, (errorService) => {
-        console.log(errorService)
+          console.log(errorService);
+        });
+      }).catch((err) => {
+          console.log(err);
       });
     }
-
-    this.loading = false;
   }
 
 
-  loadImage(files) {
-    this.fileToUpload = files.item(0);
-    this.preview(files);
+loadImage(files) {
+  this.fileToUpload = files.item(0);
+  this.preview(files);
+}
+
+preview(files) {
+  if (files.length === 0)
+    return;
+
+  var reader = new FileReader();
+  this.imagePath = files;
+  reader.readAsDataURL(files[0]);
+  reader.onload = (_event) => {
+    this.imgURL = reader.result;
   }
- 
-  preview(files) {
-    if (files.length === 0)
-      return;
- 
-    var mimeType = files.item(0).type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.message = "Pro favor seleccione una imgaen";
-      return;
-    }
- 
-    var reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result;
-    }
-  }
+}
 
 }

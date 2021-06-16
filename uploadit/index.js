@@ -17,14 +17,13 @@ const multerMid = multer({
 
 app.disable('x-powered-by')
 app.use(multerMid.single('file'))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
 app.use(cors());
 
 app.post('/uploads', async (req, res, next) => {
   try {
     const myFile = req.file
-    console.log(myFile);
     const imageUrl = await uploadImage(myFile)
     
     res

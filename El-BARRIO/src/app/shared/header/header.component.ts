@@ -11,7 +11,7 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  loginSession:boolean = User.sessionIn;
+  loginSession:boolean = false;;
   session:string = User.displayName;
   cartItemCount:number = 0;
 
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     document.addEventListener('mousemove', ()=> {
       if (localStorage.getItem('session')) {
         let user = JSON.parse(localStorage.getItem('session'));
-        if (user.id_customer || user.id_entrepreneur) {
+        if (user.id_user != 2) {
           this.loginSession = true;
           this.cartService.getItemCartQuantity(user.id_customer)
             .subscribe((data:any) => {

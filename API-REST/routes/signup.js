@@ -9,34 +9,31 @@ const sql = require('mssql');
 
 router.post('/registerConsumidor', async(req,res) => {
     try {
+        console.log("0");
         //BD_USERS
         sql.close();
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
-            .query(`SELECT user_name FROM USERS 
+            .query(`SELECT * FROM USERS 
                     WHERE username = '${req.body.email}'`);
 
-        
         if (Object.keys(users.recordsets[0]).length == 0){
-            
             let registerU =  await pool.request()
             .query(`INSERT INTO USERS (username,pass,user_type)
             VALUES ('${req.body.email}','${req.body.password}',${1})`);
-            
+    
             //BD_ELBARRIO
             sql.close();
             let poolEB = await sql.connect(dbElbarrio);
-            
+
             //USERS
             let registerBdUsers = await poolEB.request()
             .query(`INSERT INTO USERS (name,email,phone,cedula,image)
             VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}','${req.body.image}')`);
-
             //ADDRESS
             let registerBdAddress = await poolEB.request()
             .query(`INSERT INTO ADDRESS (state,city,address_opt)
             VALUES ('${req.body.state}','${req.body.city}','${req.body.address_opt}')`);
-            
             //CUSTOMERS
             let registerBdCustomers = await poolEB.request()
             .query(`INSERT INTO CUSTOMERS (id_customer,address)
@@ -85,30 +82,30 @@ router.post('/registerEmprendedor', async(req,res) => {
         sql.close();
         let pool = await sql.connect(dbUsersConfig);
         let users =  await pool.request()
-            .query(`SELECT user_name FROM USERS 
-                    WHERE user_name = '${req.body.email}'`);
+            .query(`SELECT * FROM USERS 
+                    WHERE username = '${req.body.email}'`);
 
         
         if (Object.keys(users.recordsets[0]).length == 0){
-            
+            console.log('1');
             let registerU =  await pool.request()
-            .query(`INSERT INTO USERS (user_name,pass,user_type)
-            VALUES ('${req.body.email}','${req.body.password}',${3})`);
-            
+            .query(`INSERT INTO USERS (username,pass,user_type)
+            VALUES ('${req.body.email}','${req.body.password}',3)`);
+            console.log('2');
             //BD_ELBARRIO
             sql.close();
             let poolEB = await sql.connect(dbElbarrio);
-            
+            console.log('3');
             //USERS
             let registerBdUsers = await poolEB.request()
             .query(`INSERT INTO USERS (name,email,phone,cedula,image)
             VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}','${req.body.imageUser}')`);
-
+            console.log('4');
             //ADDRESS
             let registerBdAddress = await poolEB.request()
             .query(`INSERT INTO ADDRESS (state,city,address_opt)
             VALUES ('${req.body.state}','${req.body.city}','${req.body.address_opt}')`);
-            
+            console.log('5');
             //ENTREPRENEUR
             let registerBdEntrepreneur = await poolEB.request()
             .query(`INSERT INTO ENTREPRENEUR (id_entrepreneur,address)

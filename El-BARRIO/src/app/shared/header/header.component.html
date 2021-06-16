@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="mx-md-4">
-                    <button [disabled]='!loginSession' type="button" class="btn btn-outline-secondary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button [disabled]='!loginSession' type="button" class="btn btn-outline-secondary text-white" data-bs-toggle="modal" data-bs-target="#formQuestion">
                         <i class="fas fa-question-circle fa-1x"></i>
                     </button>
                 </div>
@@ -72,7 +72,7 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="formQuestion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -88,7 +88,7 @@
           <button [disabled]="question.value==''" type="submit" class="btn btn-primary">
             Enviar
           </button>
-          <button id="closeQuestModal"  [hidden]="true" data-bs-dismiss="modal" data-bs-target="#exampleModal">
+          <button id="closeQuestModal"  [hidden]="true" data-bs-dismiss="modal" data-bs-target="#formQuestion">
         </button>
         </form>
       </div>

@@ -15,7 +15,7 @@
         </div>
         <div class="col-6">
             <h3 class="fs-3">Agregar producto nuevo</h3>
-            <form class="text-center border-0" autocomplete="off" #forma="ngForm" (ngSubmit)="registerItem(forma)">
+            <form class="text-center border-0" autocomplete="off" #forma="ngForm" (ngSubmit)="registerItem(forma,cateSelect.selected)">
                 <input class="form-control my-3" type="text" placeholder="Nombre" name="name"
                     [class.is-invalid]="name.invalid && name.touched" [ngModel]="item.name" #name="ngModel" required>
                 <textarea class="form-control my-3" type="text" placeholder="Descripción" name="description"

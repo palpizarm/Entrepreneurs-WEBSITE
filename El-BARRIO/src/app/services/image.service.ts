@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class ImageService {
 
   constructor(private http: HttpClient) { }
-
+  
 
   postImage(fileToUpload: File) {
     const url = 'http://localhost:9001/uploads';
@@ -17,7 +17,6 @@ export class ImageService {
       "Content-Type": "application/json",
     });
     formData.append('file', fileToUpload, fileToUpload.name);
-    console.log(formData);
     return this.http.post(url, formData, {headers:headers});
   }
 
