@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
                 this.cartItemCount = 0;
               }
             }, (error) => {
-              console.log(error);
             })
         }
       }

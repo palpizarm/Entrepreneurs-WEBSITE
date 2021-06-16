@@ -13,14 +13,16 @@ export class ItemViewComponent implements OnInit {
   item:any = {};
   items:any[] = [];
   reviews:any[] = [];
-  rating:any[] = ['fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGold','fa fa-star fa-2x starGray','fa fa-star fa-2x starGray'];
   user:any={
-    id: '',
+    id_customer: '',
     name: '',
     annotation : '',
-    rating : ''
+    id_rating : 0,
+    image : ''
   };
+  ratingList = [true,true,true,false,false];
   loading :boolean = false;
+  msg:string = '';
 
   constructor(private router : ActivatedRoute, private itemService : ItemsService, private shopCartService : ShoppingCartService) {
     this.router.params.subscribe(params => {
@@ -29,14 +31,16 @@ export class ItemViewComponent implements OnInit {
     var userData = JSON.parse(localStorage.getItem('session'));
     this.user.name = userData.name;
     if (userData.id_customer) {
-      this.user.id = userData.id_customer;
+      this.user.id_customer = userData.id_customer;
     }
     else {
-      this.user.id = userData.id_entrepreneur;
+      this.user.id_customer = userData.id_entrepreneur;
     }
+    this.user.image = userData.image;
   }
   
   ngOnInit(): void {
+    
   }
 
   getItemInformation(id:number) {
@@ -64,23 +68,53 @@ export class ItemViewComponent implements OnInit {
   }
 
   registerReview(form:any){
+    if (form.invalid) {
+      Object.values(form.controls).forEach((control: any) => {
+        control.markAsTouched();
+      })
+      if (this.user.rating == 0) {
+        this.msg = 'Por favor, califique el producto con las estrellas';
+      }
+      return;
+    }
+    this.loading = true;
+    this.itemService.setItemReview(this.user.id_customer, this.item.id_item, this.user.id_rating, form.value.annotation)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.getItemInformation(this.item.id_item);
+          this.resetValues();
+        }
+      }, error => {
+        console.log(error);
+        this.loading = false;
+      })
+
 
   }
 
   AddItem() {
     let id_item = this.item.id_item;
     let id_user = this.user.id;
+    this.loading = true;
     this.shopCartService.addItemShopCart(id_item,id_user,this.count)
       .subscribe((data:any) => {
         if(data.code > 0) {
           document.getElementById('btn-successAdd').click();
+          this.resetValues();
         }
         else {
           console.log(data.msg)
+          this.loading = true;
         }
       }, error => {
         console.log(error);
+        this.loading = true;
       })
+  }
+
+  resetValues() {
+    this.user.annotation = '';
+    this.user.rating = 0;
   }
 
 }

@@ -1,20 +1,20 @@
 <div id="topPage" class="mx-5 px-5 animated fadeIn">
     <div class="row mt-5">
         <div class="col-4 ms-md-5">
-            <img class="img-fluid" [src]=" item.img | noimage" alt="" srcset="">
+            <img class="img-fluid" [src]=" item.image | noimage" alt="" srcset="">
         </div>
         <div class="col-6">
             <h3 class="fs-2 my-2">{{item.name}}</h3>
             <div class="col-8 my-1">
-                <span class="my-2" [class]="star" *ngFor="let star of rating"></span>
+                <i class="fas fa-star mx-1 my-2" [ngClass]="{'starGold': item, 'starGray' : !item }" *ngFor="let item of ratingList"></i>
             </div>
-            <h5 class="fs-4 my-2">{{item.description}}</h5>
+            <h5 class="fs-4 my-4">{{item.description}}</h5>
             <h5 class="fs-4 my-2">{{item.price * count | currency: 'CRC':'symbol-narrow'}}</h5>
             <div class="my-2">
                 <button (click)="quantitySub()" class="fas fa-minus btn"></button>
                 <input class="border-1 rounded-pill text-center" type="text" [value]="count">
                 <button (click)="quantityAdd()" class="fas fa-plus btn"></button>
-                <button type="button" class="btn-bg-green btn btn-lg m-2 rounded-pill my-2" (click)="AddItem()">Añadir
+                <button type="button" class="btn-bg-green btn btn-lg rounded-pill my-2" (click)="AddItem()">Añadir
                     al carrito</button>
             </div>
         </div>
@@ -32,6 +32,9 @@
                 <img class="card-img-top mx-auto img-fluid rounded-circle" [src]="review.image | noimage">
                 <div class="card-body text-center">
                     <h4 class="card-title">{{review.name | uppercase}}</h4>
+                    <div class="my-1">
+                        <i class="fas fa-star mx-1 my-2" [ngClass]="{'starGold': (4 > item), 'starGray' : (item > 4-1)}" *ngFor="let item of [1,2,3,4,5]"></i>
+                    </div>
                     <h5>{{review.annotation}}</h5>
                 </div>
             </div>
@@ -41,7 +44,24 @@
         <div class="container mx-md-5 px-md-5 mb-5">
             <form class="text-center form-control w-75" autocomplete="off" (ngSubmit)="registerReview(forma)"
                 #forma="ngForm">
-                <h3 class="fs-2 text-start mb-5">{{user.name | uppercase}}</h3>
+                <div class="list-group list-group-horizontal">
+                    <img class="card-img-top rounded-circle" [src]="user.image | noimage"
+                        style="width: 60px; height: 60px;">
+                    <h3 class="list-group-item fs-2 text-center mb-5 border-0">{{user.name | uppercase}}</h3>
+                </div>
+                <div class="rate">
+                    <input type="radio" id="star5" name="rate" (change)="user.id_rating = 5; msg=''" />
+                    <label for="star5" title="text"></label>
+                    <input type="radio" id="star4" name="rate" (change)="user.id_rating = 4; msg=''" />
+                    <label for="star4" title="text"></label>
+                    <input type="radio" id="star3" name="rate" (change)="user.id_rating = 3; msg=''" />
+                    <label for="star3" title="text"></label>
+                    <input type="radio" id="star2" name="rate" (change)="user.id_rating = 2; msg=''" />
+                    <label for="star2" title="text"></label>
+                    <input type="radio" id="star1" name="rate" (change)="user.id_rating = 1; msg=''" />
+                    <label for="star1" title="text"></label>
+                </div>
+                <small class="text-danger row w-100 ms-md-2">{{msg}}</small>
                 <textarea class="form-control" type="text" placeholder="Opinión" name="annotation"
                     [class.is-invalid]="annotation.invalid && annotation.touched" [ngModel]="user.annotation"
                     #annotation="ngModel" required style="resize: none;">
