@@ -69,4 +69,9 @@ export class ItemsService {
     return this.http.post(url,{'id_shop':q});
   }
 
+  showProductsToAprove() {
+    const url = `http://localhost:3000/productToAprove/getProductsToAprove`;
+    return this.http.post(url,{});
+  }
+
 }
