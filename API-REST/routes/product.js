@@ -11,9 +11,9 @@ router.post('/insertNewProduct', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let product =  await poolEB.request()
-            .query(`INSERT INTO ITEM (id_category, id_shop, name, status, description, price)
+            .query(`INSERT INTO ITEM (id_category, id_shop, name, status, description, price, image)
             VALUES (${req.body.id_category},${req.body.id_shop},'${req.body.name}',${req.body.status},
-            '${req.body.description}',${req.body.price})`);
+            '${req.body.description}',${req.body.price},'${req.body.image}')`);
         
         res.json({
             code : 1,
@@ -39,7 +39,7 @@ router.post('/getTopProductosDest', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT TOP(8) id_item,name,price FROM ITEM WHERE status = 1`);
+            .query(`SELECT TOP(8) id_item,name,price,image FROM ITEM WHERE status = 1`);
         
         res.json({
             code : 1,
@@ -64,7 +64,7 @@ router.post('/getTopProductosNuevos', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT TOP(8) id_item,name,price FROM ITEM WHERE status = 1
+            .query(`SELECT TOP(8) id_item,name,price,image FROM ITEM WHERE status = 1
             ORDER BY id_item DESC`);
         
         res.json({
@@ -92,7 +92,9 @@ router.post('/shopShowProducts', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT *
+            .query(`SELECT i.id_item, i.id_category, i.id_shop, i.name as itemName, i.status, i.description as itemDescription,
+            i.price, i.image as itemImage, s.id_entrepreneur, s.id_shop_status, s.name as shopName, s.description as shopDescription,
+            s.image as shopImage
             FROM ITEM i INNER JOIN SHOP s ON i.id_shop = s.id_shop
             WHERE s.id_shop = ${req.body.id_shop} AND status = 1`);
         
@@ -128,7 +130,8 @@ router.post('/shopProducts', async(req,res) => {
                         i.status, 
                         i.description, 
                         i.price, 
-                        s.id_entrepreneur
+                        s.id_entrepreneur,
+                        i.image as itemImage
                     FROM ITEM i
                     inner join SHOP s ON i.id_shop = s.id_shop
                     WHERE s.id_shop = ${req.body.id_shop}`);
@@ -157,7 +160,7 @@ router.post('/productSearchBar', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT id_item, name, price
+            .query(`SELECT id_item, name, price, image
             FROM ITEM
             WHERE name LIKE '%${req.body.name}%' AND status = 1`);
         
