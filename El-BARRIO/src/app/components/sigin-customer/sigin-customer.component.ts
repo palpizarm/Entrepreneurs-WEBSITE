@@ -13,15 +13,15 @@ declare var $: any;
 export class SiginCustomerComponent implements OnInit {
 
   customer = {
-    name: 'Juan Sequiera',
-    password1: '1234',
-    password2: '1234',
-    phone: '54847842',
-    id: '11235478',
-    mail: 'juan@gmail.com',
-    state: 'San Jose',
-    city: 'Perez Zeledón',
-    direction: '200 m n de la pulperia El pueblo',
+    name: '',
+    password1: '',
+    password2: '',
+    phone: '',
+    id: '',
+    mail: '',
+    state: '',
+    city: ' ',
+    direction: '',
     image: ''
   }
   loading: boolean = false;

@@ -11,17 +11,17 @@ declare var $: any;
 })
 export class SiginSellerComponent implements OnInit {
   customer = {
-    name: 'Santiago',
-    password1: '1234',
-    password2: '1234',
-    phone: '548784874',
-    id: '12554788',
-    mail: 'santiago@gmail.com',
-    state: 'Cartago',
-    city: 'Cartago',
-    direction: 'Oriental, 200 m norte de la entrega del TEC',
-    shopName: 'Cafe don Manuel',
-    shopDescription: 'Somos productos directos de cáfe'
+    name: '',
+    password1: '',
+    password2: '',
+    phone: '',
+    id: '',
+    mail: '',
+    state: '',
+    city: '',
+    direction: '',
+    shopName: '',
+    shopDescription: ''
   }
   errorLogin: boolean = false;
   msgError: string = '';
