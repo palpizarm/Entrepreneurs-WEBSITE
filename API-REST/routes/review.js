@@ -39,9 +39,10 @@ router.post('/showReviews', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let review =  await poolEB.request()
-            .query(`SELECT r.id_review, r.id_customer, r.id_item, r.id_rating, r.annotation, u.name
+            .query(`SELECT r.id_review, r.id_customer, r.id_item, r.id_rating, r.annotation, u.name, u.image
             FROM REVIEW r inner join CUSTOMERS c on r.id_customer=c.id_customer
-            inner join USERS u on c.id_customer=u.id_user`);
+            inner join USERS u on c.id_customer=u.id_user
+            WHERE id_item = ${req.body.id_item}`);
         
         res.json({
             code : 1,

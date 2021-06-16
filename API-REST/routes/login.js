@@ -33,7 +33,9 @@ router.post('/getSession', async (req, res) => {
                 WHERE u.email = '${req.body.username}'`);
             } else {
                 var resBd = await poolEB.request()
-                .query(`SELECT *
+                .query(`SELECT u.id_user, u.name as userName, u.email, u.phone, u.cedula, u.image as userImage,
+                e.id_entrepreneur, e.address, a.state, a.city, a.address_opt, s.id_shop, s.id_shop_status, s.name as shopName,
+                s.description, s.image as shopImage
                 FROM USERS u inner join ENTREPRENEUR e ON u.id_user = e.id_entrepreneur 
                 inner join ADDRESS a on e.address = a.id_address
                 inner join SHOP s on s.id_entrepreneur = e.id_entrepreneur

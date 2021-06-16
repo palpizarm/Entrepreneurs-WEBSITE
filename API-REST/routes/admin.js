@@ -39,7 +39,7 @@ router.post('/showQuestions', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let question =  await poolEB.request()
-            .query(`SELECT q.id_question, q.id_customer, q.question, u.name
+            .query(`SELECT q.id_question, q.id_customer, q.question, u.name, u.image
             FROM QUESTION q inner join CUSTOMERS c on q.id_customer = c.id_customer inner join
             USERS u on c.id_customer = u.id_user
             WHERE q.answer IS NULL`);

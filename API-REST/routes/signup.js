@@ -16,7 +16,7 @@ router.post('/registerConsumidor', async(req,res) => {
             .query(`SELECT user_name FROM USERS 
                     WHERE username = '${req.body.email}'`);
 
-        console.log(req.body);
+        
         if (Object.keys(users.recordsets[0]).length == 0){
             
             let registerU =  await pool.request()
@@ -30,7 +30,7 @@ router.post('/registerConsumidor', async(req,res) => {
             //USERS
             let registerBdUsers = await poolEB.request()
             .query(`INSERT INTO USERS (name,email,phone,cedula,image)
-            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}', '${req.body.image}')`);
+            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}','${req.body.image}')`);
 
             //ADDRESS
             let registerBdAddress = await poolEB.request()
@@ -101,8 +101,8 @@ router.post('/registerEmprendedor', async(req,res) => {
             
             //USERS
             let registerBdUsers = await poolEB.request()
-            .query(`INSERT INTO USERS (name,email,phone,cedula)
-            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}')`);
+            .query(`INSERT INTO USERS (name,email,phone,cedula,image)
+            VALUES ('${req.body.name}','${req.body.email}','${req.body.phone}','${req.body.cedula}','${req.body.imageUser}')`);
 
             //ADDRESS
             let registerBdAddress = await poolEB.request()
@@ -119,10 +119,10 @@ router.post('/registerEmprendedor', async(req,res) => {
 
             //SHOP
             let registerBdShop = await poolEB.request()
-            .query(`INSERT INTO SHOP (id_entrepreneur,id_shop_status,name,description)
+            .query(`INSERT INTO SHOP (id_entrepreneur,id_shop_status,name,description,image)
             VALUES((SELECT TOP(1) id_entrepreneur FROM ENTREPRENEUR
             Order By id_entrepreneur DESC), 
-            ${2},'${req.body.nombreTienda}','${req.body.descripcion}')`);
+            ${2},'${req.body.nombreTienda}','${req.body.descripcion}','${req.body.imageEntrepreneur}')`);
 
 
             res.json({
