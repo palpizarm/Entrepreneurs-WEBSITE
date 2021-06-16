@@ -12,7 +12,7 @@ export class ShopService {
     const url = `http://localhost:3000/shopShow/getShops`;
     return this.http.post(url,{});
   }
-  shopProducts
+
   getShopItems(id:string) {
     const url = `http://localhost:3000/productShow/shopShowProducts`;
     return this.http.post(url,{'id_shop':id});

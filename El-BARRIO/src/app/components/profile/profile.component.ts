@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
 
   selectedItem:any= {};
   salesHistory:any[] =[];
+  purchasesHistory:any[] = [];
 
   constructor(private shopService: ShopService, private itemService: ItemsService) {
     if (localStorage.getItem('session')) {
@@ -65,6 +66,7 @@ export class ProfileComponent implements OnInit {
       case 0: // show personal infor
         break;
       case 1: // purchases history
+        this.loadPurchases();
         break;
       case 2: // shops items product
         this.loadItemsByShop();
@@ -77,6 +79,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  loadPurchases() {
+    let user = JSON.parse(localStorage.getItem('session'));
+    console.log(user.id_user);
+    this.itemService.showBuyHistory(user.id_user)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.purchasesHistory = data.data;
+          console.log(data.data);
+        }
+      })
+  }
 
   registerCustomer(registerForm) {
     event.preventDefault();

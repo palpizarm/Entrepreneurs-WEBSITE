@@ -20,7 +20,8 @@ export class RegisterService {
       'cedula' : customer.id,
       'state' : customer.state,
       'city' : customer.city,
-      'address_opt' : customer.direction
+      'address_opt' : customer.direction,
+      'image': customer.image
     }
     return this.http.post(url,body);
   }
@@ -37,7 +38,10 @@ export class RegisterService {
       'city' : seller.city,
       'address_opt' : seller.direction,
       'nombreTienda' : seller.shopName,
-      'descripcion' : seller.shopDescription
+      'descripcion' : seller.shopDescription,
+      'imageUser': seller.imageU,
+      'imageEntrepreneur' : seller.imageE
+
     }
     return this.http.post(url,body);
   }
