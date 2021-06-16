@@ -106,17 +106,20 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.code > 0) {
           this.loadItemsByShop();
+          this.loading = false;
         }
       }, (error) => {
+        this.loading = false;
         console.log(error);
       })
-    this.loading = false;
+    
   }
 
 
   openModalToAdd(item){
     this.selectedItem = item;
     document.getElementById('btn-modalAdd').click()
+    console.log(this.selectedItem);
   }
 
 }

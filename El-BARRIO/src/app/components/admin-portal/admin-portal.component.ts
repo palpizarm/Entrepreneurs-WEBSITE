@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
@@ -31,17 +32,21 @@ export class AdminPortalComponent implements OnInit {
     '¿Esta seguro que desea aprobar la solicitud de la tienda?',
     '¿Esta seguro que desea rechazar la solicitud de la tienda?',
     '¿Esta seguro que desea bloquear de forma permanente a la tienda?',
-    'La tienda será suspendida por 15 días. ¿Esta seguro?'
+    'La tienda será suspendida por 15 días. ¿Esta seguro?',
+    '¿Esta seguro que desea habilitar la tienda?'
   ]
+  questions:any[] =[];
+  answer:string = '';
 
-  constructor(public router: Router, private shopService: ShopService) {
-    if (localStorage.getItem('user-session')) {
+  constructor(public router: Router, private shopService: ShopService, private adminService: AdminService) {
+    console.log(localStorage.getItem('session'))
+    if (localStorage.getItem('session')) {
       try {
-        var user = JSON.parse(localStorage.getItem('user-session'));
+        var user = JSON.parse(localStorage.getItem('session'));
         this.session = user.user_name;
         this.userLogin = true;
       } catch (error) {
-        localStorage.removeItem('user-session');
+        localStorage.removeItem('session');
       }
     }
     this.getAllShops();
@@ -52,8 +57,7 @@ export class AdminPortalComponent implements OnInit {
 
   logout() {
     this.userLogin = false;
-    localStorage.removeItem("user-session");
-    this.session = 'Iniciar Sesión';
+    localStorage.removeItem("session");
     this.router.navigate(['/home']);
 
   }
@@ -100,12 +104,23 @@ export class AdminPortalComponent implements OnInit {
   }
 
   getQuestions() {
-
+    this.adminService.getShowQuestions()
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.questions = data.data;
+        }
+      })
   }
 
-  response(question) {
-    let response = (<HTMLInputElement>document.getElementById("text-reponse")).value;
-    console.log(question,response);
+  response(question,asnwer) {
+    if (asnwer != '') {
+      this.adminService.changeQuestionAnswer(asnwer,question.id_question)
+        .subscribe((data:any)=> {
+          if (data.code > 0) {
+            this.getQuestions();
+          }
+        })
+    }
   }
 
   registerAdmin(registerForm) {
@@ -143,19 +158,60 @@ export class AdminPortalComponent implements OnInit {
   actionEjecut() {
     // aproveOption
     if (this.optionToDo == 0) {
+      this.shopService.updateShopState(1, this.shopDetails.id_shop)
+        .subscribe((data: any) => {
+          if (data.code > 0) {
+            this.shops = [];
+            this.getShopsToAprove();
+          }
+        })
       console.log('aprove shop');
     }
     // reject option
     else if (this.optionToDo == 1) {
-      console.log('reject option');
+      this.shopService.updateShopState(3, this.shopDetails.id_shop)
+        .subscribe((data: any) => {
+          if (data.code > 0) {
+            this.shops = [];
+            this.getShopsToAprove();
+          }
+        })
+      console.log('aprove shop');
     }
     // block shop
     else if (this.optionToDo == 2) {
+      this.shopService.updateShopState(3, this.shopDetails.id_shop)
+        .subscribe((data: any) => {
+          if (data.code > 0) {
+            this.shops = [];
+            this.getAllShops();
+          }
+        })
       console.log('block shop');
     }
     // suspender shop
     else if (this.optionToDo == 3) {
+      this.shopService.updateShopState(4, this.shopDetails.id_shop)
+        .subscribe((data: any) => {
+          if (data.code > 0) {
+            this.shops = [];
+            this.getAllShops();
+          }
+        })
       console.log('suspender shop');
+
+    }
+    // habilitar shop
+    else if (this.optionToDo == 4) {
+      this.shopService.updateShopState(1, this.shopDetails.id_shop)
+        .subscribe((data: any) => {
+          if (data.code > 0) {
+            this.shops = [];
+            this.getAllShops();
+          }
+        })
+      console.log('habilitar shop');
+
     }
   }
 

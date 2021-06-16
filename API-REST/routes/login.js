@@ -25,15 +25,21 @@ router.post('/getSession', async (req, res) => {
             //BD_ELBARRIO
             sql.close();
             let poolEB = await sql.connect(dbElbarrioConfig);
+            var resBd;
             if (users.recordsets[0][0].user_type == 1) {
-                var resBd = await poolEB.request()
+                resBd = await poolEB.request()
                     .query(`SELECT *
                 FROM USERS u inner join CUSTOMERS c ON u.id_user = c.id_customer 
                 inner join ADDRESS a on c.address = a.id_address
                 WHERE u.email = '${req.body.username}'`);
+            } else if (users.recordsets[0][0].user_type == 2) {
+                resBd = await poolEB.request()
+                    .query(`select * from USERS U
+                    INNER JOIN ADMINS A on A.id_admin = U.id_user
+                    WHERE u.email = '${req.body.username}'`);
             } else {
-                var resBd = await poolEB.request()
-                .query(`SELECT u.id_user, u.name, u.email, u.phone, u.cedula, u.image,
+                resBd = await poolEB.request()
+                    .query(`SELECT u.id_user, u.name, u.email, u.phone, u.cedula, u.image,
                 e.id_entrepreneur, e.address, a.state, a.city, a.address_opt, s.id_shop, s.id_shop_status, s.name as shopName,
                 s.description, s.image as shopImage
                 FROM USERS u inner join ENTREPRENEUR e ON u.id_user = e.id_entrepreneur 

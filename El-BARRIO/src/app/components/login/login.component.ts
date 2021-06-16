@@ -43,9 +43,12 @@ export class LoginComponent implements OnInit {
         console.log(data);
         if (data.code > 0) {
           let user = data.data[0];
-          console.log(JSON.stringify(user));
           localStorage.setItem('session', JSON.stringify(user))
           User.setData(user);
+          if(user.id_admin) {
+            this.router.navigate(['/admin-portal']);
+            return;
+          }
           this.router.navigate(['/home']);
         }
         else {

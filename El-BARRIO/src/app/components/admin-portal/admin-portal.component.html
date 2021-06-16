@@ -7,10 +7,10 @@
         </div>
         <div class="float-end col">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-outline-secondary" (click)="logout()" [disabled]='!userLogin'>
+                <button type="button" class="btn btn-outline-secondary text-white" (click)="logout()"
+                    [disabled]='!userLogin'>
                     <i class="fas fa-sign-out-alt"></i>
-                </button>
-                <button type="button" class="btn btn-outline-secondary text-white">
+                    <span class="mx-md-2"></span>
                     <i class="bi bi-person-circle"></i>
                     <span class="align-middle ms-2">{{session | uppercase}}</span>
                 </button>
@@ -57,10 +57,15 @@
                                             aria-label="Basic outlined example">
                                             <button type="button" (click)="viewShop(shop)"
                                                 class="btn bg-el-barrio-blue rounded-pill">Detalles</button>
-                                            <button type="button" (click)="viewModalTo(3,shop)"
+                                            <button [hidden]="shop.id_shop_status == 4 || shop.id_shop_status == 3"
+                                                type="button" (click)="viewModalTo(3,shop)"
                                                 class="btn bg-el-barrio-dark-blue rounded-pill">Suspender</button>
-                                            <button type="button" (click)="viewModalTo(2,shop)"
+                                            <button [hidden]="shop.id_shop_status == 3" type="button"
+                                                (click)="viewModalTo(2,shop)"
                                                 class="btn bg-el-barrio-golden rounded-pill">Bloquear</button>
+                                            <button [hidden]="shop.id_shop_status != 4" type="button"
+                                                (click)="viewModalTo(4,shop)"
+                                                class="btn bg-el-barrio-golden rounded-pill">Habilitar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +112,7 @@
             <!--Questions-->
             <div *ngIf="options[2]">
                 <div class="row row-cols-1 g-4">
-                    <div class="card border-0" *ngFor="let question of shops">
+                    <div class="card border-0" *ngFor="let question of questions">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-3">
@@ -115,13 +120,15 @@
                                 </div>
                                 <div class="col-sm-12 col-md-9">
                                     <h3 class="fs-4 fw-bold">{{question.name}}</h3>
-                                    <p>{{question.description}}</p>
+                                    <p>{{question.question}}</p>
                                     <div class="form-floating">
-                                        <textarea class="form-control" id="text-reponse" style="height: 100px; resize: none;"></textarea>
+                                        <textarea #answer name="answer"  class="form-control" id="answer"
+                                            style="height: 100px; resize: none;" required
+                                            [class.is-invalid]="answer.invalid && answer.touched"></textarea>
                                         <label for="floatingTextarea2">Respuesta</label>
-                                      </div>
-                                      <div class="mt-2 d-flex justify-content-center">
-                                        <button type="button" (click)="response(question)"
+                                    </div>
+                                    <div class="mt-2 d-flex justify-content-center">
+                                        <button type="submit" (click)="response(question, answer.value)"
                                             class="w-50 btn bg-el-barrio-blue rounded-pill">Responder</button>
                                     </div>
                                 </div>
@@ -198,14 +205,16 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="shopDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade w-100" id="shopDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <img class="card-img-top mx-auto rounded" [src]="shopDetails.image| noimage"
+                    style="width: 150px; height: 150px;;">
                 <h1>{{shopDetails.name}}</h1>
                 <h4>{{shopDetails.description}}</h4>
                 <h5 class="fs-5 my-1">
@@ -224,7 +233,7 @@
 
 
 <!-- Button trigger modal -->
-<button id="btn-modal" type="button" data-bs-toggle="modal" data-bs-target="#modalToConfirm">
+<button id="btn-modal" type="button" [hidden]="true" data-bs-toggle="modal" data-bs-target="#modalToConfirm">
 </button>
 
 <!-- Modal -->
