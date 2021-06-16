@@ -64,6 +64,7 @@ export class SiginCustomerComponent implements OnInit {
 
       $.ajax(settings).then((result) => {
         console.log(result);
+        result = JSON.parse(result);
         this.loading = false;
         this.registerService.registerCustomer(registerForm.value,result.data)
         .subscribe((data: any) => {
