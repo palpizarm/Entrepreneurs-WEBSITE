@@ -57,4 +57,16 @@ export class ItemsService {
     }
     return this.http.post(url,body);
   }
+
+
+  showBuyHistory(q:number) {
+    const url = `http://localhost:3000/order/getBuyHistory`;
+    return this.http.post(url,{'id_customer':q});
+  }
+
+  showSentHistory(q:number) {
+    const url = `http://localhost:3000/order/getSentHistory`;
+    return this.http.post(url,{'id_shop':q});
+  }
+
 }
