@@ -4,8 +4,8 @@
             <div class="card puntero" (click)="goToItem( item )">
                 <img class="card-img-top mx-auto" [src]="item.image | noimage">
                 <div class="card-body text-center">
-                    <h4 class="card-title">{{item.name}}</h4>
-                    <h5>{{item.price|currency: 'CRC':'symbol-narrow'}}</h5>
+                    <h4 class="card-title fs-4">{{item.name}}</h4>
+                    <h5 class="fs-5">{{item.price|currency: 'CRC':'symbol-narrow'}}</h5>
                 </div>
             </div>
         </div>
