@@ -36,7 +36,7 @@ router.post('/getItemsByCategory', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let categories =  await poolEB.request()
-            .query(`select i.id_item, i.id_category, i.id_shop, i.name, i.description, i.price, c.name as category_name, i.image as imageItem
+            .query(`select i.id_item, i.id_category, i.id_shop, i.name, i.description, i.price, c.name as category_name, i.image as image
             from ITEM i 
             inner join CATEGORY c on i.id_category = c.id_category
             WHERE c.id_category = ${req.body.id_category} AND i.status = 1`);
@@ -91,7 +91,7 @@ router.post('/showCategoriesItem', async(req,res) => {
         
         let categories =  await poolEB.request()
             .query(`SELECT c.id_category, c.name AS nameCategory, c.image AS imageCategory, i.id_item,
-            i.id_shop, i.name , i.status, i.description, i.price, i.image AS imageItem
+            i.id_shop, i.name , i.status, i.description, i.price, i.image AS image
             FROM
             CATEGORY c INNER JOIN ITEM i on c.id_category=i.id_category
             WHERE i.status = 1

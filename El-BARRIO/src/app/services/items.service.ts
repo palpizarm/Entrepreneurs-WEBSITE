@@ -36,4 +36,25 @@ export class ItemsService {
     }
     return this.http.post(url,body);
   }
+
+
+  registerItem(id_category:number,
+              id_shop:number,
+              name:string,
+              description:string,
+              price:number,
+              image:string)
+  {
+    const url = `http://localhost:3000/productShow/insertNewProduct`;
+    const body = {
+      'id_category':id_category,
+      'id_shop':id_shop,
+      'name':name,
+      'status':1,
+      'description':description,
+      'price':price,
+      'image':image
+    }
+    return this.http.post(url,body);
+  }
 }

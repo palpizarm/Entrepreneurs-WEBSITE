@@ -21,12 +21,15 @@ export class ProfileComponent implements OnInit {
     mail: '',
     state: '',
     city: '',
-    direction: ''
+    direction: '',
+    image : ''
   }
   loading: boolean = false;
   msgError: string = '';
   errorLogin: boolean = false;
   items: any[] = [];
+
+  selectedItem:any= {};
 
   constructor(private shopService: ShopService, private itemService: ItemsService) {
     if (localStorage.getItem('session')) {
@@ -108,6 +111,12 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       })
     this.loading = false;
+  }
+
+
+  openModalToAdd(item){
+    this.selectedItem = item;
+    document.getElementById('btn-modalAdd').click()
   }
 
 }

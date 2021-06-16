@@ -94,7 +94,7 @@ export class ItemViewComponent implements OnInit {
 
   AddItem() {
     let id_item = this.item.id_item;
-    let id_user = this.user.id;
+    let id_user = this.user.id_customer;
     this.loading = true;
     this.shopCartService.addItemShopCart(id_item,id_user,this.count)
       .subscribe((data:any) => {
@@ -104,11 +104,11 @@ export class ItemViewComponent implements OnInit {
         }
         else {
           console.log(data.msg)
-          this.loading = true;
+          this.loading = false;
         }
       }, error => {
         console.log(error);
-        this.loading = true;
+        this.loading = false;
       })
   }
 

@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoriesComponent},
   { path: 'information', component: InformationComponent},
   { path: 'shop/:id', component: ShopViewComponent},
-  { path: 'addItem/:id', component: AddItemComponent},
+  { path: 'addItem', component: AddItemComponent},
   { path: 'itemView/:id', component: ItemViewComponent},
   { path: 'registerUser', component: SiginCustomerComponent},
   { path: 'registerSeller', component: SiginSellerComponent},

@@ -92,8 +92,8 @@ router.post('/shopShowProducts', async(req,res) => {
         let poolEB = await sql.connect(dbElbarrio);
         
         let products =  await poolEB.request()
-            .query(`SELECT i.id_item, i.id_category, i.id_shop, i.name as itemName, i.status, i.description as itemDescription,
-            i.price, i.image as itemImage, s.id_entrepreneur, s.id_shop_status, s.name as shopName, s.description as shopDescription,
+            .query(`SELECT i.id_item, i.id_category, i.id_shop, i.name, i.status, i.description as itemDescription,
+            i.price, i.image, s.id_entrepreneur, s.id_shop_status, s.name as shopName, s.description as shopDescription,
             s.image as shopImage
             FROM ITEM i INNER JOIN SHOP s ON i.id_shop = s.id_shop
             WHERE s.id_shop = ${req.body.id_shop} AND status = 1`);

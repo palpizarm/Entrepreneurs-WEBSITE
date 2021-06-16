@@ -20,14 +20,16 @@
                 </button>
             </div>
         </div>
-       
+
         <div class="col-10">
-             <!--Personal information-->
+            <!--Personal information-->
             <div *ngIf="options[0]">
                 <button class="btn float-end mb-2" (click)="readonlyInfo = !readonlyInfo">
                     <i *ngIf="readonlyInfo" class="fas fa-pencil-alt fa-2x"></i>
                     <i *ngIf="!readonlyInfo" class="fas fa-window-close fa-2x"></i>
                 </button>
+                <img class="card-img-top mx-auto img-fluid rounded-circle mb-2" [src]="userData.image | noimage"
+                    style="width: 80px; height: 80px;">
                 <form class="text-center border-0" autocomplete="off" #forma="ngForm"
                     (ngSubmit)="registerCustomer(forma)">
                     <input [disabled]="readonlyInfo" class="form-control" type="text" placeholder="Nombre completo"
@@ -106,7 +108,7 @@
             <div *ngIf="options[2]" style="min-height: 100vh;">
                 <h2 class="fs-2 d-inline-block">Lista de productos</h2>
                 <div class="float-end">
-                    <a class="btn" [routerLink]="['/addItem/0']">
+                    <a class="btn" [routerLink]="['/addItem']">
                         <i class="fas fa-plus-circle fa-2x"></i>
                     </a>
                 </div>
@@ -116,18 +118,20 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-3">
-                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.itemImage| noimage">
                                     <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
                                 </div>
                                 <div class="col-sm-12 col-md-9 d-flex align-items-center">
                                     <div class="w-100">
                                         <div class="btn-group d-block" role="group">
                                             <div class="d-flex justify-content-center">
-                                                <a type="button" [routerLink]="['/addItem/'+item.id_item]"
-                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</a>
-                                                <button [disabled]="!item.status || loading" [hidden]="!item.status" type="button" (click)="changeStatus(item,0)"
+                                                <button type="button" (click)="openModalToAdd(item)"
+                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
+                                                <button [disabled]="!item.status || loading" [hidden]="!item.status"
+                                                    type="button" (click)="changeStatus(item,0)"
                                                     class="w-50 btn bg-el-barrio-blue rounded-pill">Deshabilitar</button>
-                                                <button [disabled]="item.status || loading" [hidden]="item.status" type="button" (click)="changeStatus(item,1)"
+                                                <button [disabled]="item.status || loading" [hidden]="item.status"
+                                                    type="button" (click)="changeStatus(item,1)"
                                                     class="w-50 btn bg-el-barrio-golden rounded-pill">Habilitar</button>
                                             </div>
                                         </div>
@@ -168,3 +172,26 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- Button trigger modal -->
+<button id="btn-modalAdd" type="button" hidden=true data-bs-toggle="modal" data-bs-target="#exampleModal">
+</button>
+<!-- Modal -->
+<div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
