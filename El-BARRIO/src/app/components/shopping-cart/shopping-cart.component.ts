@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ItemsService } from 'src/app/services/items.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
@@ -11,17 +12,16 @@ export class ShoppingCartComponent implements OnInit {
   items: any = [];
   date: any = new Date();
   orderForm:any = {
-    phone: '',
-    state: '',
-    city: '',
-    address : '',
+    comment : '',
     cardNumebr : '',
-    dateExpired : '',
+    month : '',
+    yaer: '',
     cvv : ''
   }
   loading:boolean = false;
+  itemSelected :any = {};
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService, private itemService : ItemsService) {
     this.loadData();
   }
 
@@ -60,8 +60,9 @@ export class ShoppingCartComponent implements OnInit {
     }
   }
 
-  processOrder(){
+  processOrder(item:any){
     document.getElementById('btn-formOrder').click();
+    this.itemSelected = item;
   }
 
   processToBuy(order:any) {
@@ -72,6 +73,22 @@ export class ShoppingCartComponent implements OnInit {
       })
       return;
     }
+    let user = JSON.parse(localStorage.getItem('session')).id_user;
+    this.itemService.registerOrder(user,
+                                    this.itemSelected.id_item,
+                                    this.itemSelected.quantity,
+                                    this.itemSelected.price,
+                                    this.itemSelected.quantity * this.itemSelected.price,
+                                    this.itemSelected.id_shopCart)
+      .subscribe((data:any) => {
+        if (data.code) {
+          this.loadData();
+        }
+        document.getElementById('closeModal').click();
+      }, (error) => {
+        document.getElementById('closeModal').click();
+      })
+    
   }
 
   CloseForm(order){

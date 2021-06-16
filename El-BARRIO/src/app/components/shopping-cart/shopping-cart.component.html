@@ -19,12 +19,14 @@
                         <div class="row">
                             <div class="col-6">
                                 <h3 class="fs-3 mx-md-5 mb-md-5">{{item.description}}</h3>
-                                <h4 class="fs-3 mx-md-5 mb-md-5">{{(item.price*item.quantity) | currency: 'CRC':'symbol-narrow'}}</h4>
-                               <div class="btn-group ">
-                                <button (click)="quantitySub(i)" class="fas fa-minus btn"></button>
-                                <input class="border-1 rounded-pill text-center" type="text" [value]="item.quantity">
-                                <button (click)="quantityAdd(i)" class="fas fa-plus btn"></button>
-                               </div>
+                                <h4 class="fs-3 mx-md-5 mb-md-5">{{(item.price*item.quantity) | currency:
+                                    'CRC':'symbol-narrow'}}</h4>
+                                <div class="btn-group ">
+                                    <button (click)="quantitySub(i)" class="fas fa-minus btn"></button>
+                                    <input class="border-1 rounded-pill text-center" type="text"
+                                        [value]="item.quantity">
+                                    <button (click)="quantityAdd(i)" class="fas fa-plus btn"></button>
+                                </div>
                             </div>
                             <div class="col-6">
                                 <div class="w-100 mx-md-5">
@@ -33,7 +35,7 @@
                                             <button class="btn mx-md-5" (click)="removeItem(item)">
                                                 <i class="far fa-times-circle fa-3x"></i>
                                             </button>
-                                            <button type="button" (click)="processOrder()"
+                                            <button type="button" (click)="processOrder(item)"
                                                 class="w-50 btn bg-el-barrio-blue rounded-pill">
                                                 Comprar
                                             </button>
@@ -67,35 +69,38 @@
             <div class="modal-body">
                 <form class="text-center form-control border-0 animeted fadeIn" autocomplete="off"
                     (ngSubmit)="processToBuy(forma)" #forma="ngForm">
-                    <input class="form-control" type="text" placeholder="Numero de celuar" name="phone"
-                        [class.is-invalid]="phone.invalid && phone.touched" [ngModel]="orderForm.phone" #phone="ngModel"
-                        required>
-                    <input class="form-control" type="text" placeholder="Provincia" name="state"
-                        [class.is-invalid]="state.invalid && state.touched" [ngModel]="orderForm.state" #state="ngModel"
-                        required>
-                    <input class="form-control" type="text" placeholder="Cantón" name="city"
-                        [class.is-invalid]="city.invalid && city.touched" [ngModel]="orderForm.city" #city="ngModel"
-                        required>
-                    <textarea class="form-control" type="text" placeholder="Otras señas" name="address"
-                        [class.is-invalid]="address.invalid && address.touched" [ngModel]="orderForm.address"
-                        #address="ngModel" required style="resize: none;">
+                    <textarea class="form-control" type="text" placeholder="Comentario para el vendedor" name="comment"
+                        [class.is-invalid]="comment.invalid && comment.touched" [ngModel]="orderForm.comment"
+                        #comment="ngModel" style="resize: vertical;">
                     </textarea>
+                    <hr>
+                    <label>Datos de pago</label>
                     <input class="form-control" type="text" placeholder="Numero de tarjeta" name="cardNumber"
-                        [class.is-invalid]="cardNumber.invalid && cardNumber.touched" [ngModel]="orderForm.cardNumber"
-                        #cardNumber="ngModel" required>
-                    <input class="form-control" type="text" placeholder="Fecha de Vencimiento" name="dateExpired"
-                        [class.is-invalid]="dateExpired.invalid && dateExpired.touched"
-                        [ngModel]="orderForm.dateExpired" #dateExpired="ngModel" required>
+                    [class.is-invalid]="cardNumber.invalid && cardNumber.touched" [ngModel]="orderForm.cardNumber"
+                    #cardNumber="ngModel" required>
+                    <div class="row my-2">
+                        <div class="col-md-6">
+                            <input class="form-control" type="number" placeholder="Mes de vencimiento" name="month"
+                            [class.is-invalid]="month.invalid && month.touched" min="1" max="12"
+                            [ngModel]="orderForm.month" #month="ngModel" required>
+
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="Año de vencimiento" name="year"
+                            [class.is-invalid]="year.invalid && year.touched"
+                            [ngModel]="orderForm.year" #year="ngModel" required>
+                        </div>
+                    </div>
                     <input class="form-control" type="text" placeholder="CVV" name="cvv"
                         [class.is-invalid]="cvv.invalid && cvv.touched" [ngModel]="orderForm.cvv" #cvv="ngModel"
                         required>
                     <input type="submit"
                         class="button btn bg-el-barrio-dark-blue btn-lg btn-block rounded-pill m-2 text-uppercase"
-                        value="Enviar Solicitud" [disabled]="loading">
+                        value="Procesar pago" [disabled]="loading">
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="CloseForm(forma)"
+                <button type="button" id="closeModal" [hidden]="true" class="btn btn-secondary" (click)="CloseForm(forma)"
                     data-bs-dismiss="modal">Close</button>
             </div>
         </div>
