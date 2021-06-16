@@ -32,6 +32,8 @@ const reviewRoute  = require('./routes/review');
 
 const shopCartRoute  = require('./routes/shop_Cart');
 
+const orderRoute  = require('./routes/order');
+
 // set routes
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
@@ -49,7 +51,7 @@ app.use('/questionToAdmin', adminRoute);
 app.use('/reviewProduct', reviewRoute);
 app.use('/shopCart', shopCartRoute);
 app.use('/categoryMenu', categoryRoute);
-
+app.use('/order', orderRoute);
 
 
 app.listen(3000);
