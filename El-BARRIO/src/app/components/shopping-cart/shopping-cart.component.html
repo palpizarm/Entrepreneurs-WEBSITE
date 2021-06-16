@@ -1,6 +1,6 @@
 <div class="mx-5 px-5 animated fadeIn" style="min-height: 100vh;">
     <h2 class="fs-1 text-center mt-md-5">Carrito de compras</h2>
-    <h5 class="text-end">Cantidad de productos: {{items.length}}</h5>
+    <h5 class="text-end fs-4">Cantidad de productos: {{items.length}}</h5>
     <div class="container mt-md-5" *ngIf="items.length == 0">
         <h6 class="fs-6 text-center">No tiene ningun producto en su carrito</h6>
         <a class="btn bg-el-barrio-golden d-block mx-auto" [routerLink]="['/categories']">
