@@ -25,6 +25,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="mx-md-4">
+                    <button [disabled]='!loginSession' type="button" class="btn btn-outline-secondary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fas fa-question-circle fa-1x"></i>
+                    </button>
+                </div>
                 <div class="col-sm-3 col-md-1">
                     <button class="btn btn-outline-secondary" (click)="goShoppingCart()">
                         <div class="d-md-inline-block cart">
@@ -64,4 +69,29 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enviar pregunta al administrador</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" #forma="ngForm" (ngSubmit)="sendMsg(question.value)">
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Pregunta:</label>
+            <textarea #question class="form-control" id="message-text"></textarea>
+          </div>
+          <button [disabled]="question.value==''" type="submit" class="btn btn-primary">
+            Enviar
+          </button>
+          <button id="closeQuestModal"  [hidden]="true" data-bs-dismiss="modal" data-bs-target="#exampleModal">
+        </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
+import { AdminService } from 'src/app/services/admin.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 
@@ -13,7 +14,13 @@ export class HeaderComponent implements OnInit {
   loginSession:boolean = User.sessionIn;
   session:string = User.displayName;
   cartItemCount:number = 0;
-  constructor(public router : Router, private cartService : ShoppingCartService) { 
+
+  questionForm = {
+    id_customer : '',
+    question : ''
+  }
+
+  constructor(public router : Router, private cartService : ShoppingCartService, private questionService : AdminService) { 
   }
 
   ngOnInit(): void {
@@ -67,5 +74,20 @@ export class HeaderComponent implements OnInit {
     if (q != '') {
       this.router.navigate(['/search', q]);
     }
+  }
+
+  sendMsg(questions) {
+    let id_user = JSON.parse(localStorage.getItem('session')).id_user;
+    this.questionService.registerQues(id_user,questions)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          document.getElementById('closeQuestModal').click();
+        }
+        else {
+          document.getElementById('closeQuestModal').click();
+        }
+      }, (err) => {
+        document.getElementById('closeQuestModal').click();
+      })
   }
 }
