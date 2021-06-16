@@ -52,6 +52,7 @@ export class ItemViewComponent implements OnInit {
     this.itemService.getItemInfo(id)
       .subscribe((data: any) => {
         if (data.code > 0) {
+          console.log(data.data);
           this.item = data.data.item[0];
           this.items = data.data.relatedItems;
           this.reviews = data.data.reviews;
@@ -88,6 +89,7 @@ export class ItemViewComponent implements OnInit {
           this.getItemInformation(this.item.id_item);
           this.resetValues();
         }
+        this.loading = false;
       }, error => {
         console.log(error);
         this.loading = false;
