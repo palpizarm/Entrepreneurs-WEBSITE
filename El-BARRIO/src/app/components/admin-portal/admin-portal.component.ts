@@ -91,7 +91,7 @@ export class AdminPortalComponent implements OnInit {
   }
 
   getShopsToAprove() {
-    this.shopService.getShopTopAprove()
+    this.shopService.getShopToAprove()
       .subscribe((data: any) => {
         if (data.code > 0) {
           this.shops = data.data;

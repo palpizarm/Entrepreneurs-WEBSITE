@@ -8,8 +8,6 @@ export class ShopService {
 
   constructor(private http : HttpClient) { }
 
-  
-
   getShops() {
     const url = `http://localhost:3000/shopShow/getShops`;
     return this.http.post(url,{});
@@ -35,13 +33,13 @@ export class ShopService {
     return this.http.post(url,{});
   }
 
-  getShopTopAprove() {
+  getShopToAprove() {
     const url = `http://localhost:3000/shopShow/getShopToAprove`;
     return this.http.post(url,{});
   }
 
   updateShopState(newState:number, idShop:number) {
-    const url = `http://localhost:3000/shopShow/getShopToAprove`;
+    const url = `http://localhost:3000/shopShow/getShopUpdate`;
     const body = {
       'id_shop_status' : newState,
       'id_shop' : idShop
