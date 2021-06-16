@@ -146,20 +146,36 @@
             <!--Sales History-->
             <div *ngIf="options[3]" style="min-height: 100vh;">
                 <div class="row row-cols-1 g-4">
-                    <div class="card border-0" *ngFor="let item of items">
+                    <div class="card border-0" *ngFor="let item of salesHistory">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12 col-md-3">
-                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.image| noimage">
-                                    <h3 class="text-center fs-4 fw-bold">{{item.name}}</h3>
+                                    <img class="card-img-top mx-auto rounded-circle" [src]="item.itemImage| noimage">
+                                    <h3 class="text-center fs-4 fw-bold">{{item.itemName}}</h3>
                                 </div>
                                 <div class="col-sm-12 col-md-9 d-flex align-items-center">
                                     <div class="w-100">
-                                        <div class="btn-group d-block" role="group">
-                                            <div class="d-flex justify-content-center">
-                                                <button type="button" (click)="viewShop(shop)"
-                                                    class="w-50 btn bg-el-barrio-blue rounded-pill">Detalles</button>
-                                            </div>
+                                        <h4><span class="fa-2">Numero de factura: </span>{{item.id_order | number}}</h4>
+                                        <h4><span class="fa-2">Precio unitario: </span>{{item.unit_price | currency:
+                                            'CRC':'symbol-narrow'}}</h4>
+                                        <h4><span class="fa-2">Cantidad: </span>{{item.quantity}}</h4>
+                                        <h4><span class="fa-2">Cantidad: </span>{{item.total | currency:
+                                            'CRC':'symbol-narrow'}}</h4>
+                                        <h4><span class="fa-2">Fecha: </span>{{item.date | date}}</h4>
+                                        <hr>
+                                        <h2>Información del cliente</h2>
+                                        <div class="list-group list-group-horizontal">
+                                            <li class="list-group-item border-0">
+                                                <h4><span class="fa-2">Nombre: </span>{{item.userName | uppercase}}</h4>
+                                            </li>
+                                            <li class="list-group-item border-0">
+                                                <h4><span class="fa-2">Celular: </span>{{item.phone}}</h4>
+                                            </li>
+                                        </div>
+                                        <div class="list-group">
+                                            <li class="list-group-item border-0">
+                                                <h4><span class="fa-2">Correo: </span>{{item.email}}</h4>
+                                            </li>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +212,8 @@
                         <h2>{{selectedItem.name}}</h2>
                         <h4>{{selectedItem.description}}</h4>
                         <h5>{{selectedItem.price | currency: 'CRC':'symbol-narrow'}}</h5>
-                        <h5>Estado: <span *ngIf="selectedItem.status">Habilitado</span><span *ngIf="!selectedItem.status">Deshabilitado</span></h5>
+                        <h5>Estado: <span *ngIf="selectedItem.status">Habilitado</span><span
+                                *ngIf="!selectedItem.status">Deshabilitado</span></h5>
                     </div>
                 </div>
 

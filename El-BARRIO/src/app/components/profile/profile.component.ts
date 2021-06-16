@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
   items: any[] = [];
 
   selectedItem:any= {};
+  salesHistory:any[] =[];
 
   constructor(private shopService: ShopService, private itemService: ItemsService) {
     if (localStorage.getItem('session')) {
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
         this.loadItemsByShop();
         break;
       case 3: // sales history
+        this.loadSalesHistory();
         break;
       default:
         break;
@@ -97,6 +99,18 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => {
         this.items = data.data;
         console.log(this.items);
+      })
+  }
+
+  loadSalesHistory() {
+    let user = JSON.parse(localStorage.getItem('session'));
+    console.log(user);
+    this.itemService.showSentHistory(user.id_shop)
+      .subscribe((data:any) => {
+        if (data.code > 0) {
+          this.salesHistory = data.data;
+          console.log(this.salesHistory);
+        }
       })
   }
 
